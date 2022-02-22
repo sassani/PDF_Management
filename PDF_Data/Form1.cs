@@ -3,6 +3,9 @@ using System;
 using System.Windows.Forms;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using iText.Kernel.Pdf.Canvas.Parser;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf.Canvas.Parser.Filter;
+using System.Text;
 
 namespace PDF_Data
 {
@@ -15,16 +18,25 @@ namespace PDF_Data
 
         private void btnOpenPdf_Click(object sender, EventArgs e)
         {
-            string dest = "C:\\Users\\Ardavan\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf";
+            string dest = "C:\\Users\\asassani1\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf";
             PdfDocument pdfDoc = new PdfDocument(new PdfReader(dest));
-            ITextExtractionStrategy extractionStrategy = new SimpleTextExtractionStrategy();
-            //IPdfTextLocation textLocation = new DefaultPdfTextLocation(1, new iText.Kernel.Geom.Rectangle(20, 2), "");
-            for (int i = 1; i <= pdfDoc.GetNumberOfPages(); i++)
+
+            Rectangle rect = new Rectangle(100, 100, 200, 200);
+            getDataFromRect(rect);
+
+        }
+
+        private void getDataFromRect(Rectangle rect)
+        {
+            string dest = "C:\\Users\\asassani1\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf";
+            PdfDocument pdfDoc = new PdfDocument(new PdfReader(dest));
+            TextRegionEventFilter regionFilter = new TextRegionEventFilter(rect);
+            StringBuilder sb = new StringBuilder();
+            for (int page = 1; page <= pdfDoc.GetNumberOfPages(); page++)
             {
-                IPdfTextLocation textLocation = new DefaultPdfTextLocation(i, new iText.Kernel.Geom.Rectangle(20, 2), "");
-                //string sPageText = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(i), extractionStrategy);
-                string sPageText ="";
-                Console.WriteLine(sPageText);
+                ITextExtractionStrategy strategy = new FilteredTextEventListener(new LocationTextExtractionStrategy(), regionFilter);
+                String str = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(page), strategy) + "\n\n";
+                sb.Append(str);
             }
 
         }
