@@ -36,20 +36,22 @@ namespace PDF_Data
             this.txtW = new System.Windows.Forms.TextBox();
             this.txtH = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.txtPreview = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpenPdf
             // 
-            this.btnOpenPdf.Location = new System.Drawing.Point(12, 12);
+            this.btnOpenPdf.Location = new System.Drawing.Point(32, 29);
+            this.btnOpenPdf.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnOpenPdf.Name = "btnOpenPdf";
-            this.btnOpenPdf.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenPdf.Size = new System.Drawing.Size(200, 55);
             this.btnOpenPdf.TabIndex = 0;
             this.btnOpenPdf.Text = "Load PDF";
             this.btnOpenPdf.UseVisualStyleBackColor = true;
@@ -59,46 +61,51 @@ namespace PDF_Data
             // 
             this.wb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.wb.Location = new System.Drawing.Point(12, 82);
-            this.wb.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wb.Location = new System.Drawing.Point(32, 196);
+            this.wb.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.wb.MinimumSize = new System.Drawing.Size(53, 48);
             this.wb.Name = "wb";
-            this.wb.Size = new System.Drawing.Size(960, 409);
+            this.wb.Size = new System.Drawing.Size(2560, 975);
             this.wb.TabIndex = 1;
             this.wb.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbReader_DocumentCompleted);
             this.wb.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.wbReader_Navigating);
             // 
             // txtX
             // 
-            this.txtX.Location = new System.Drawing.Point(12, 34);
+            this.txtX.Location = new System.Drawing.Point(32, 81);
+            this.txtX.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtX.Name = "txtX";
-            this.txtX.Size = new System.Drawing.Size(56, 20);
+            this.txtX.Size = new System.Drawing.Size(143, 38);
             this.txtX.TabIndex = 1;
             this.txtX.Text = "0";
             this.txtX.TextChanged += new System.EventHandler(this.txtX_TextChanged);
             // 
             // txtY
             // 
-            this.txtY.Location = new System.Drawing.Point(74, 34);
+            this.txtY.Location = new System.Drawing.Point(197, 81);
+            this.txtY.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtY.Name = "txtY";
-            this.txtY.Size = new System.Drawing.Size(56, 20);
+            this.txtY.Size = new System.Drawing.Size(143, 38);
             this.txtY.TabIndex = 2;
             this.txtY.Text = "0";
             this.txtY.TextChanged += new System.EventHandler(this.txtX_TextChanged);
             // 
             // txtW
             // 
-            this.txtW.Location = new System.Drawing.Point(136, 34);
+            this.txtW.Location = new System.Drawing.Point(363, 81);
+            this.txtW.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtW.Name = "txtW";
-            this.txtW.Size = new System.Drawing.Size(56, 20);
+            this.txtW.Size = new System.Drawing.Size(143, 38);
             this.txtW.TabIndex = 3;
             this.txtW.Text = "200";
             this.txtW.TextChanged += new System.EventHandler(this.txtX_TextChanged);
             // 
             // txtH
             // 
-            this.txtH.Location = new System.Drawing.Point(198, 34);
+            this.txtH.Location = new System.Drawing.Point(528, 81);
+            this.txtH.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtH.Name = "txtH";
-            this.txtH.Size = new System.Drawing.Size(56, 20);
+            this.txtH.Size = new System.Drawing.Size(143, 38);
             this.txtH.TabIndex = 4;
             this.txtH.Text = "200";
             this.txtH.TextChanged += new System.EventHandler(this.txtX_TextChanged);
@@ -113,46 +120,51 @@ namespace PDF_Data
             this.panel1.Controls.Add(this.txtX);
             this.panel1.Controls.Add(this.txtW);
             this.panel1.Controls.Add(this.txtY);
-            this.panel1.Location = new System.Drawing.Point(93, 12);
+            this.panel1.Location = new System.Drawing.Point(248, 29);
+            this.panel1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(265, 64);
+            this.panel1.Size = new System.Drawing.Size(707, 153);
             this.panel1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "X:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(71, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Y:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(133, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "W:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(195, 18);
+            this.label4.Location = new System.Drawing.Point(520, 43);
+            this.label4.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(18, 13);
+            this.label4.Size = new System.Drawing.Size(43, 32);
             this.label4.TabIndex = 3;
             this.label4.Text = "H:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(355, 43);
+            this.label3.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 32);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "W:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(189, 43);
+            this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 32);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Y:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 43);
+            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 32);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "X:";
             // 
             // openFileDialog1
             // 
@@ -163,21 +175,33 @@ namespace PDF_Data
             this.txtPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPreview.Location = new System.Drawing.Point(12, 497);
+            this.txtPreview.Location = new System.Drawing.Point(32, 1185);
+            this.txtPreview.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtPreview.Name = "txtPreview";
-            this.txtPreview.Size = new System.Drawing.Size(960, 259);
+            this.txtPreview.Size = new System.Drawing.Size(2553, 612);
             this.txtPreview.TabIndex = 3;
             this.txtPreview.Text = "";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(966, 29);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(201, 55);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Add Column";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 817);
+            this.ClientSize = new System.Drawing.Size(2624, 1948);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPreview);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.wb);
             this.Controls.Add(this.btnOpenPdf);
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "Form1";
             this.Text = "PDF Management";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -202,6 +226,7 @@ namespace PDF_Data
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.RichTextBox txtPreview;
+        private System.Windows.Forms.Button button1;
     }
 }
 
