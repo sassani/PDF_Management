@@ -20,17 +20,25 @@ namespace PDF_Data
 
         private void btnOpenPdf_Click(object sender, EventArgs e)
         {
-            //string dest = "https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.webbrowser.document?view=netframework-4.7.2";
             string dest = "C:\\Users\\asassani1\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //Get the path of specified file
+                dest = openFileDialog1.FileName;
+                wb.Url = new Uri(dest);
+                pdfDoc = new iText.Kernel.Pdf.PdfDocument(new PdfReader(dest));
+            }
+            //string dest = "https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.webbrowser.document?view=netframework-4.7.2";
+
             //iText.Kernel.Pdf.PdfDocument pdfDoc = new iText.Kernel.Pdf.PdfDocument(new PdfReader(dest));
             //IronPdf.PdfDocument ironPdf = IronPdf.PdfDocument.FromFile(dest);
 
             //string AllText = ironPdf.ExtractAllText();
-            wb.Url = new Uri(dest);
+
             //HtmlDocument test = wbReader.Document;
 
-            Rectangle rect = new Rectangle(0, 0, 250, 200);
-            getDataFromRect(rect);
+            //Rectangle rect = new Rectangle(0, 0, 250, 200);
+            //getDataFromRect(rect);
 
         }
 
@@ -39,10 +47,10 @@ namespace PDF_Data
         private iText.Kernel.Pdf.PdfDocument pdfDoc;
 
 
-        private void getDataFromRect(Rectangle rect)
+        private void getDataFromRect()
         {
-            string dest = "C:\\Users\\asassani1\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf";
-            pdfDoc = new iText.Kernel.Pdf.PdfDocument(new PdfReader(dest));
+            //string dest = "C:\\Users\\asassani1\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf";
+            //pdfDoc = new iText.Kernel.Pdf.PdfDocument(new PdfReader(dest));
             //TextRegionEventFilter regionFilter = new TextRegionEventFilter(rect);
             //StringBuilder sb = new StringBuilder();
             //for (int page = 1; page <= pdfDoc.GetNumberOfPages(); page++)
@@ -64,7 +72,7 @@ namespace PDF_Data
                 );
             TextRegionEventFilter regionFilter = new TextRegionEventFilter(rect);
             ITextExtractionStrategy strategy = new FilteredTextEventListener(new LocationTextExtractionStrategy(), regionFilter);
-            String str = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(1), strategy);
+            String str = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(1), strategy)+"\n";
             txtPreview.Text = str;
         }
 

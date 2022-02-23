@@ -40,7 +40,8 @@ namespace PDF_Data
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtPreview = new System.Windows.Forms.TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtPreview = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,19 +51,18 @@ namespace PDF_Data
             this.btnOpenPdf.Name = "btnOpenPdf";
             this.btnOpenPdf.Size = new System.Drawing.Size(75, 23);
             this.btnOpenPdf.TabIndex = 0;
-            this.btnOpenPdf.Text = "button1";
+            this.btnOpenPdf.Text = "Load PDF";
             this.btnOpenPdf.UseVisualStyleBackColor = true;
             this.btnOpenPdf.Click += new System.EventHandler(this.btnOpenPdf_Click);
             // 
             // wb
             // 
-            this.wb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.wb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.wb.Location = new System.Drawing.Point(12, 237);
+            this.wb.Location = new System.Drawing.Point(12, 82);
             this.wb.MinimumSize = new System.Drawing.Size(20, 20);
             this.wb.Name = "wb";
-            this.wb.Size = new System.Drawing.Size(960, 568);
+            this.wb.Size = new System.Drawing.Size(960, 409);
             this.wb.TabIndex = 1;
             this.wb.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbReader_DocumentCompleted);
             this.wb.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.wbReader_Navigating);
@@ -154,13 +154,20 @@ namespace PDF_Data
             this.label4.TabIndex = 3;
             this.label4.Text = "H:";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // txtPreview
             // 
-            this.txtPreview.Location = new System.Drawing.Point(39, 146);
-            this.txtPreview.Multiline = true;
+            this.txtPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPreview.Location = new System.Drawing.Point(12, 497);
             this.txtPreview.Name = "txtPreview";
-            this.txtPreview.Size = new System.Drawing.Size(863, 637);
-            this.txtPreview.TabIndex = 2;
+            this.txtPreview.Size = new System.Drawing.Size(960, 259);
+            this.txtPreview.TabIndex = 3;
+            this.txtPreview.Text = "";
             // 
             // Form1
             // 
@@ -173,10 +180,10 @@ namespace PDF_Data
             this.Controls.Add(this.btnOpenPdf);
             this.Name = "Form1";
             this.Text = "PDF Management";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -193,7 +200,8 @@ namespace PDF_Data
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtPreview;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.RichTextBox txtPreview;
     }
 }
 
