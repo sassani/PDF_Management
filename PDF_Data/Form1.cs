@@ -55,7 +55,7 @@ namespace PDF_Data
                 Document doc = f.Document;
                 Renderer renderer = new Renderer();
                 preview = renderer.Render(doc.Pages[0], new SizeF(595, 840));
-                pictureBox1.Image = preview;
+                //pictureBox1.Image = preview;
             }
             //string dest = "https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.webbrowser.document?view=netframework-4.7.2";
 
@@ -71,10 +71,6 @@ namespace PDF_Data
 
 
         }
-
-        bool WebBrowserDocumentEventSet = false;
-
-
 
         private void getDataFromRect()
         {
@@ -93,74 +89,10 @@ namespace PDF_Data
 
         private void GetPreviewDataFromRect()
         {
-            iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(
-               float.Parse(txtX.Text),
-                float.Parse(txtY.Text),
-                float.Parse(txtW.Text),
-                float.Parse(txtH.Text)
-                );
+            iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(3,3,3,3);
             TextRegionEventFilter regionFilter = new TextRegionEventFilter(rect);
             ITextExtractionStrategy strategy = new FilteredTextEventListener(new LocationTextExtractionStrategy(), regionFilter);
             String str = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(1), strategy)+"\n";
-            txtPreview.Text = str;
-        }
-
-        private void wbReader_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            //WebBrowser wb = (sender as WebBrowser);
-            if (wb.ReadyState == WebBrowserReadyState.Complete && WebBrowserDocumentEventSet == false)
-            {
-                //WebBrowserDocumentEventSet = true;
-                //wb.Document.MouseDown += OnHtmlDocumentClick;
-            }
-            Console.WriteLine(wb.DocumentType);
-            //wb.DocumentType.MouseDown += OnHtmlDocumentClick;
-        }
-
-        private void wbReader_Navigating(object sender, WebBrowserNavigatingEventArgs e)
-        {
-            //(sender as WebBrowser).Document.MouseDown -= OnHtmlDocumentClick;
-            //WebBrowserDocumentEventSet = false;
-        }
-
-        private void OnHtmlDocumentClick(object sender, HtmlElementEventArgs e)
-        {
-            Console.WriteLine(e.ClientMousePosition);
-        }
-
-        private void txtX_TextChanged(object sender, EventArgs e)
-        {
-            GetPreviewDataFromRect();
-        }
-
-        private void panel2_MouseClick(object sender, MouseEventArgs e)
-        {
-            Graphics g = txtPreview.CreateGraphics();
-            Pen pen = new Pen(Color.Red);
-            g.DrawLine(pen,e.X,0,e.X,800 );
-            g.Dispose();
-            System.Drawing.Point point = new System.Drawing.Point(e.Location.X,e.Location.Y);
-            Console.WriteLine(point);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string dest = "C:\\Users\\asassani1\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf";
-            File f = new File(dest);
-            Document doc = f.Document;
-            Renderer renderer = new Renderer();
-            var g = renderer.Render(doc.Pages[0], new SizeF(595, 840));
-            pictureBox1.Image = g;
-        }
-
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            Graphics g = pictureBox1.CreateGraphics();
-            Pen pen = new Pen(Color.Red);
-            g.DrawLine(pen, e.X, 0, e.X, 800);
-            g.Dispose();
-            System.Drawing.Point point = new System.Drawing.Point(e.Location.X, e.Location.Y);
-            Console.WriteLine(point);
         }
 
         private void btnAddField_Click(object sender, EventArgs e)
