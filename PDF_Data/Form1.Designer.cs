@@ -52,9 +52,10 @@ namespace PDF_Data
             // 
             // btnOpenPdf
             // 
-            this.btnOpenPdf.Location = new System.Drawing.Point(12, 12);
+            this.btnOpenPdf.Location = new System.Drawing.Point(32, 29);
+            this.btnOpenPdf.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnOpenPdf.Name = "btnOpenPdf";
-            this.btnOpenPdf.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenPdf.Size = new System.Drawing.Size(200, 55);
             this.btnOpenPdf.TabIndex = 0;
             this.btnOpenPdf.Text = "Load PDF";
             this.btnOpenPdf.UseVisualStyleBackColor = true;
@@ -64,46 +65,51 @@ namespace PDF_Data
             // 
             this.wb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.wb.Location = new System.Drawing.Point(12, 82);
-            this.wb.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wb.Location = new System.Drawing.Point(32, 196);
+            this.wb.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.wb.MinimumSize = new System.Drawing.Size(53, 48);
             this.wb.Name = "wb";
-            this.wb.Size = new System.Drawing.Size(960, 409);
+            this.wb.Size = new System.Drawing.Size(2560, 975);
             this.wb.TabIndex = 1;
             this.wb.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbReader_DocumentCompleted);
             this.wb.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.wbReader_Navigating);
             // 
             // txtX
             // 
-            this.txtX.Location = new System.Drawing.Point(12, 34);
+            this.txtX.Location = new System.Drawing.Point(32, 81);
+            this.txtX.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtX.Name = "txtX";
-            this.txtX.Size = new System.Drawing.Size(56, 20);
+            this.txtX.Size = new System.Drawing.Size(143, 38);
             this.txtX.TabIndex = 1;
             this.txtX.Text = "0";
             this.txtX.TextChanged += new System.EventHandler(this.txtX_TextChanged);
             // 
             // txtY
             // 
-            this.txtY.Location = new System.Drawing.Point(74, 34);
+            this.txtY.Location = new System.Drawing.Point(197, 81);
+            this.txtY.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtY.Name = "txtY";
-            this.txtY.Size = new System.Drawing.Size(56, 20);
+            this.txtY.Size = new System.Drawing.Size(143, 38);
             this.txtY.TabIndex = 2;
             this.txtY.Text = "0";
             this.txtY.TextChanged += new System.EventHandler(this.txtX_TextChanged);
             // 
             // txtW
             // 
-            this.txtW.Location = new System.Drawing.Point(136, 34);
+            this.txtW.Location = new System.Drawing.Point(363, 81);
+            this.txtW.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtW.Name = "txtW";
-            this.txtW.Size = new System.Drawing.Size(56, 20);
+            this.txtW.Size = new System.Drawing.Size(143, 38);
             this.txtW.TabIndex = 3;
             this.txtW.Text = "200";
             this.txtW.TextChanged += new System.EventHandler(this.txtX_TextChanged);
             // 
             // txtH
             // 
-            this.txtH.Location = new System.Drawing.Point(198, 34);
+            this.txtH.Location = new System.Drawing.Point(528, 81);
+            this.txtH.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtH.Name = "txtH";
-            this.txtH.Size = new System.Drawing.Size(56, 20);
+            this.txtH.Size = new System.Drawing.Size(143, 38);
             this.txtH.TabIndex = 4;
             this.txtH.Text = "200";
             this.txtH.TextChanged += new System.EventHandler(this.txtX_TextChanged);
@@ -118,9 +124,10 @@ namespace PDF_Data
             this.panel1.Controls.Add(this.txtX);
             this.panel1.Controls.Add(this.txtW);
             this.panel1.Controls.Add(this.txtY);
-            this.panel1.Location = new System.Drawing.Point(93, 12);
+            this.panel1.Location = new System.Drawing.Point(248, 29);
+            this.panel1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(265, 64);
+            this.panel1.Size = new System.Drawing.Size(707, 153);
             this.panel1.TabIndex = 0;
             // 
             // label4
@@ -144,9 +151,10 @@ namespace PDF_Data
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(71, 18);
+            this.label2.Location = new System.Drawing.Point(189, 43);
+            this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 13);
+            this.label2.Size = new System.Drawing.Size(42, 32);
             this.label2.TabIndex = 3;
             this.label2.Text = "Y:";
             // 
@@ -217,7 +225,7 @@ namespace PDF_Data
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 817);
             this.Controls.Add(this.pictureBox1);
@@ -228,6 +236,7 @@ namespace PDF_Data
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnAddField);
             this.Controls.Add(this.btnOpenPdf);
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "Form1";
             this.Text = "PDF Management";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
