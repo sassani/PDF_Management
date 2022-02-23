@@ -1,7 +1,7 @@
 ﻿
 namespace PDF_Data
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -36,13 +36,18 @@ namespace PDF_Data
             this.txtW = new System.Windows.Forms.TextBox();
             this.txtH = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.txtPreview = new System.Windows.Forms.RichTextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnAddField = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOpenPdf
@@ -118,23 +123,14 @@ namespace PDF_Data
             this.panel1.Size = new System.Drawing.Size(265, 64);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // label4
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "X:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(71, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Y:";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(195, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(18, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "H:";
             // 
             // label3
             // 
@@ -145,14 +141,23 @@ namespace PDF_Data
             this.label3.TabIndex = 3;
             this.label3.Text = "W:";
             // 
-            // label4
+            // label2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(195, 18);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(18, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "H:";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(71, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(17, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Y:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "X:";
             // 
             // openFileDialog1
             // 
@@ -163,26 +168,72 @@ namespace PDF_Data
             this.txtPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPreview.Location = new System.Drawing.Point(12, 497);
+            this.txtPreview.Location = new System.Drawing.Point(492, 497);
             this.txtPreview.Name = "txtPreview";
-            this.txtPreview.Size = new System.Drawing.Size(960, 259);
+            this.txtPreview.Size = new System.Drawing.Size(480, 259);
             this.txtPreview.TabIndex = 3;
             this.txtPreview.Text = "";
+            // 
+            // panel2
+            // 
+            this.panel2.ImeMode = System.Windows.Forms.ImeMode.Katakana;
+            this.panel2.Location = new System.Drawing.Point(127, 222);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(741, 210);
+            this.panel2.TabIndex = 4;
+            this.panel2.Visible = false;
+            this.panel2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseClick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 41);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Load PDF";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox1.Location = new System.Drawing.Point(8, 497);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(478, 259);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            // 
+            // btnAddField
+            // 
+            this.btnAddField.Location = new System.Drawing.Point(364, 12);
+            this.btnAddField.Name = "btnAddField";
+            this.btnAddField.Size = new System.Drawing.Size(75, 23);
+            this.btnAddField.TabIndex = 0;
+            this.btnAddField.Text = "Add Feield";
+            this.btnAddField.UseVisualStyleBackColor = true;
+            this.btnAddField.Click += new System.EventHandler(this.btnAddField_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 817);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.txtPreview);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.wb);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAddField);
             this.Controls.Add(this.btnOpenPdf);
             this.Name = "Form1";
             this.Text = "PDF Management";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -202,6 +253,10 @@ namespace PDF_Data
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.RichTextBox txtPreview;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnAddField;
     }
 }
 
