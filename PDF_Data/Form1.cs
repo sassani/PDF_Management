@@ -31,8 +31,16 @@ namespace PDF_Data
         public void AddField(FieldModel fm)
         {
             fields.Add(fm);
+            RenderFields();
         }
 
+        private void RenderFields()
+        {
+            foreach (FieldModel fm in fields)
+            {
+                Console.WriteLine(fm.Name);
+            }
+        }
 
         public void DrawLineInt(PaintEventArgs e)
         {
@@ -51,11 +59,10 @@ namespace PDF_Data
         }
         private void btnOpenPdf_Click(object sender, EventArgs e)
         {
-            string dest = "C:\\Users\\asassani1\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 //Get the path of specified file
-                dest = openFileDialog1.FileName;
+                string dest = openFileDialog1.FileName;
                 wb.Url = new Uri(dest);
                 pdfDoc = new iText.Kernel.Pdf.PdfDocument(new PdfReader(dest));
 

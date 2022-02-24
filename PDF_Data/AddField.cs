@@ -42,6 +42,7 @@ namespace PDF_Data
                 lines["right"] = new BLine("right", new Point(e.X, 0), new Point(e.X, 3000), rbRight.ForeColor);
             }
             DrawLines();
+            CheckForm();
         }
 
         private void DrawLines()
@@ -68,13 +69,31 @@ namespace PDF_Data
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            parent.AddField(new FieldModel(textBox1.Text, GetPoints()));
+            parent.AddField(new FieldModel(txtFieldName.Text, GetPoints()));
             Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private Boolean CheckFieldName(string name)
+        {
+            if (name != "") return true;
+            return false;
+        }
+
+        private void CheckForm()
+        {
+            btnSave.Enabled =  (
+                CheckFieldName(txtFieldName.Text) && 
+                (lines.Count == 4));
+        }
+
+        private void txtFieldName_TextChanged(object sender, EventArgs e)
+        {
+            CheckForm();
         }
     }
 }

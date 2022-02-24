@@ -34,7 +34,7 @@ namespace PDF_Data
             this.rbTop = new System.Windows.Forms.RadioButton();
             this.rbRight = new System.Windows.Forms.RadioButton();
             this.rbBottom = new System.Windows.Forms.RadioButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtFieldName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pbPreview = new System.Windows.Forms.PictureBox();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -104,12 +104,13 @@ namespace PDF_Data
             this.rbBottom.Text = "Bottom";
             this.rbBottom.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtFieldName
             // 
-            this.textBox1.Location = new System.Drawing.Point(87, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(366, 20);
-            this.textBox1.TabIndex = 2;
+            this.txtFieldName.Location = new System.Drawing.Point(87, 10);
+            this.txtFieldName.Name = "txtFieldName";
+            this.txtFieldName.Size = new System.Drawing.Size(366, 20);
+            this.txtFieldName.TabIndex = 2;
+            this.txtFieldName.TextChanged += new System.EventHandler(this.txtFieldName_TextChanged);
             // 
             // label1
             // 
@@ -148,6 +149,7 @@ namespace PDF_Data
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Enabled = false;
             this.btnSave.Location = new System.Drawing.Point(713, 67);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
@@ -165,10 +167,11 @@ namespace PDF_Data
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.pbPreview);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtFieldName);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmAddField";
             this.Text = "AddField";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
@@ -184,7 +187,7 @@ namespace PDF_Data
         private System.Windows.Forms.RadioButton rbTop;
         private System.Windows.Forms.RadioButton rbRight;
         private System.Windows.Forms.RadioButton rbBottom;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtFieldName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pbPreview;
         private System.Windows.Forms.Button btnCancel;
