@@ -12,18 +12,27 @@ using org.pdfclown.files;
 //using IronPdf;
 using System.Drawing;
 using org.pdfclown.documents;
+using System.Collections.Generic;
 
 namespace PDF_Data
 {
     public partial class frmMain : Form
     {
+        private Image preview;
+        private iText.Kernel.Pdf.PdfDocument pdfDoc;
+        private List<FieldModel> fields;
+
         public frmMain()
         {
             InitializeComponent();
+            fields = new List<FieldModel>();
         }
 
-        private Image preview;
-        private iText.Kernel.Pdf.PdfDocument pdfDoc;
+        public void AddField(FieldModel fm)
+        {
+            fields.Add(fm);
+        }
+
 
         public void DrawLineInt(PaintEventArgs e)
         {
@@ -97,7 +106,7 @@ namespace PDF_Data
 
         private void btnAddField_Click(object sender, EventArgs e)
         {
-            frmAddField addField = new frmAddField(preview);
+            frmAddField addField = new frmAddField(this, preview);
             addField.ShowDialog();
         }
     }

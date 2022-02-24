@@ -32,8 +32,8 @@ namespace PDF_Data
             this.rbLeft = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbTop = new System.Windows.Forms.RadioButton();
-            this.rbBottom = new System.Windows.Forms.RadioButton();
             this.rbRight = new System.Windows.Forms.RadioButton();
+            this.rbBottom = new System.Windows.Forms.RadioButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pbPreview = new System.Windows.Forms.PictureBox();
@@ -80,18 +80,6 @@ namespace PDF_Data
             this.rbTop.Text = "Top";
             this.rbTop.UseVisualStyleBackColor = true;
             // 
-            // rbBottom
-            // 
-            this.rbBottom.AutoSize = true;
-            this.rbBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.rbBottom.Location = new System.Drawing.Point(164, 24);
-            this.rbBottom.Name = "rbBottom";
-            this.rbBottom.Size = new System.Drawing.Size(58, 17);
-            this.rbBottom.TabIndex = 0;
-            this.rbBottom.TabStop = true;
-            this.rbBottom.Text = "Bottom";
-            this.rbBottom.UseVisualStyleBackColor = true;
-            // 
             // rbRight
             // 
             this.rbRight.AutoSize = true;
@@ -103,6 +91,18 @@ namespace PDF_Data
             this.rbRight.TabStop = true;
             this.rbRight.Text = "Right";
             this.rbRight.UseVisualStyleBackColor = true;
+            // 
+            // rbBottom
+            // 
+            this.rbBottom.AutoSize = true;
+            this.rbBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.rbBottom.Location = new System.Drawing.Point(164, 24);
+            this.rbBottom.Name = "rbBottom";
+            this.rbBottom.Size = new System.Drawing.Size(58, 17);
+            this.rbBottom.TabIndex = 0;
+            this.rbBottom.TabStop = true;
+            this.rbBottom.Text = "Bottom";
+            this.rbBottom.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -125,10 +125,11 @@ namespace PDF_Data
             this.pbPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbPreview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pbPreview.Location = new System.Drawing.Point(12, 96);
             this.pbPreview.Name = "pbPreview";
             this.pbPreview.Size = new System.Drawing.Size(776, 342);
-            this.pbPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbPreview.TabIndex = 4;
             this.pbPreview.TabStop = false;
             this.pbPreview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbPreview_MouseClick);
@@ -142,6 +143,7 @@ namespace PDF_Data
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -152,6 +154,7 @@ namespace PDF_Data
             this.btnSave.TabIndex = 5;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // frmAddField
             // 
