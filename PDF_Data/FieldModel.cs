@@ -9,13 +9,17 @@ namespace PDF_Data
 {
     public class FieldModel
     {
-        public string Name { get; set; }
-        public List<Point> RectPoints { get; set; }
 
-        public FieldModel(string name, List<Point> recPoints)
+        public enum FieldTypes { FIXED, LABEL };
+        public string Name { get; set; }
+        public Rectangle DataArea { get; set; }
+        public FieldTypes Type { get; set; }
+
+        public FieldModel(string name, FieldTypes ft, Rectangle rect)
         {
             Name = name;
-            RectPoints = recPoints;
+            DataArea = rect;
+            Type = ft;
         }
     }
 }

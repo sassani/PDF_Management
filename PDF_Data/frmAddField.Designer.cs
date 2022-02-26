@@ -39,8 +39,10 @@ namespace PDF_Data
             this.pbPreview = new System.Windows.Forms.PictureBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // rbLeft
@@ -123,13 +125,12 @@ namespace PDF_Data
             // 
             // pbPreview
             // 
-            this.pbPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbPreview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.pbPreview.Location = new System.Drawing.Point(12, 96);
+            this.pbPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbPreview.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.pbPreview.Location = new System.Drawing.Point(3, 3);
             this.pbPreview.Name = "pbPreview";
-            this.pbPreview.Size = new System.Drawing.Size(776, 342);
+            this.pbPreview.Size = new System.Drawing.Size(100, 100);
             this.pbPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbPreview.TabIndex = 4;
             this.pbPreview.TabStop = false;
@@ -158,14 +159,27 @@ namespace PDF_Data
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.pbPreview);
+            this.panel1.Location = new System.Drawing.Point(12, 96);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(776, 345);
+            this.panel1.TabIndex = 6;
+            // 
             // frmAddField
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.pbPreview);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtFieldName);
             this.Controls.Add(this.groupBox1);
@@ -175,6 +189,8 @@ namespace PDF_Data
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,5 +208,6 @@ namespace PDF_Data
         private System.Windows.Forms.PictureBox pbPreview;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Panel panel1;
     }
 }
