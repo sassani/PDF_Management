@@ -29,7 +29,6 @@ namespace PDF_Data
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnOpenPdf = new System.Windows.Forms.Button();
             this.wb = new System.Windows.Forms.WebBrowser();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnImportList = new System.Windows.Forms.Button();
@@ -37,8 +36,9 @@ namespace PDF_Data
             this.txtFilesList = new System.Windows.Forms.RichTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.lbFields = new System.Windows.Forms.ListBox();
+            this.dgvFields = new System.Windows.Forms.DataGridView();
             this.txtPreviewData = new System.Windows.Forms.RichTextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -47,26 +47,16 @@ namespace PDF_Data
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFields)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnOpenPdf
-            // 
-            this.btnOpenPdf.Location = new System.Drawing.Point(3, 3);
-            this.btnOpenPdf.Name = "btnOpenPdf";
-            this.btnOpenPdf.Size = new System.Drawing.Size(75, 23);
-            this.btnOpenPdf.TabIndex = 0;
-            this.btnOpenPdf.Text = "Load PDF";
-            this.btnOpenPdf.UseVisualStyleBackColor = true;
-            this.btnOpenPdf.Click += new System.EventHandler(this.btnOpenPdf_Click);
             // 
             // wb
             // 
-            this.wb.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.wb.Location = new System.Drawing.Point(0, 42);
+            this.wb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wb.Location = new System.Drawing.Point(0, 0);
             this.wb.MinimumSize = new System.Drawing.Size(20, 20);
             this.wb.Name = "wb";
-            this.wb.Size = new System.Drawing.Size(390, 586);
+            this.wb.Size = new System.Drawing.Size(390, 628);
             this.wb.TabIndex = 1;
             // 
             // openFileDialog1
@@ -80,7 +70,7 @@ namespace PDF_Data
             this.btnImportList.Name = "btnImportList";
             this.btnImportList.Size = new System.Drawing.Size(75, 23);
             this.btnImportList.TabIndex = 0;
-            this.btnImportList.Text = "Import List";
+            this.btnImportList.Text = "Open PDF";
             this.btnImportList.UseVisualStyleBackColor = true;
             this.btnImportList.Click += new System.EventHandler(this.btnImportList_Click);
             // 
@@ -91,13 +81,15 @@ namespace PDF_Data
             this.btnAddField.Name = "btnAddField";
             this.btnAddField.Size = new System.Drawing.Size(75, 23);
             this.btnAddField.TabIndex = 0;
-            this.btnAddField.Text = "Add Feield";
+            this.btnAddField.Text = "Add Field";
             this.btnAddField.UseVisualStyleBackColor = true;
             this.btnAddField.Click += new System.EventHandler(this.btnAddField_Click);
             // 
             // txtFilesList
             // 
-            this.txtFilesList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtFilesList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilesList.Location = new System.Drawing.Point(0, 39);
             this.txtFilesList.Name = "txtFilesList";
             this.txtFilesList.Size = new System.Drawing.Size(368, 589);
@@ -133,33 +125,44 @@ namespace PDF_Data
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.wb);
-            this.splitContainer2.Panel1.Controls.Add(this.btnOpenPdf);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.dataGridView1);
+            this.splitContainer2.Panel2.Controls.Add(this.lbFields);
+            this.splitContainer2.Panel2.Controls.Add(this.dgvFields);
             this.splitContainer2.Panel2.Controls.Add(this.txtPreviewData);
             this.splitContainer2.Panel2.Controls.Add(this.btnAddField);
             this.splitContainer2.Size = new System.Drawing.Size(756, 628);
             this.splitContainer2.SplitterDistance = 390;
             this.splitContainer2.TabIndex = 0;
             // 
+            // lbFields
+            // 
+            this.lbFields.FormattingEnabled = true;
+            this.lbFields.Location = new System.Drawing.Point(39, 76);
+            this.lbFields.Name = "lbFields";
+            this.lbFields.Size = new System.Drawing.Size(289, 160);
+            this.lbFields.TabIndex = 2;
+            this.lbFields.SelectedIndexChanged += new System.EventHandler(this.lbFields_SelectedIndexChanged);
+            // 
+            // dgvFields
+            // 
+            this.dgvFields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFields.Location = new System.Drawing.Point(3, 49);
+            this.dgvFields.Name = "dgvFields";
+            this.dgvFields.Size = new System.Drawing.Size(357, 137);
+            this.dgvFields.TabIndex = 1;
+            // 
             // txtPreviewData
             // 
-            this.txtPreviewData.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtPreviewData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPreviewData.Location = new System.Drawing.Point(0, 202);
             this.txtPreviewData.Name = "txtPreviewData";
             this.txtPreviewData.Size = new System.Drawing.Size(362, 426);
             this.txtPreviewData.TabIndex = 0;
             this.txtPreviewData.Text = "";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 49);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(357, 137);
-            this.dataGridView1.TabIndex = 1;
             // 
             // frmMain
             // 
@@ -178,14 +181,12 @@ namespace PDF_Data
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFields)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnOpenPdf;
         private System.Windows.Forms.WebBrowser wb;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnImportList;
@@ -193,8 +194,9 @@ namespace PDF_Data
         private System.Windows.Forms.RichTextBox txtFilesList;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvFields;
         private System.Windows.Forms.RichTextBox txtPreviewData;
+        private System.Windows.Forms.ListBox lbFields;
     }
 }
 

@@ -40,6 +40,11 @@ namespace PDF_Data
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtPageFrom = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtPagesTo = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtPreview = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
             this.panel1.SuspendLayout();
@@ -65,7 +70,7 @@ namespace PDF_Data
             this.groupBox1.Controls.Add(this.rbLeft);
             this.groupBox1.Location = new System.Drawing.Point(12, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(441, 54);
+            this.groupBox1.Size = new System.Drawing.Size(423, 54);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Boundaries";
@@ -110,7 +115,7 @@ namespace PDF_Data
             // 
             this.txtFieldName.Location = new System.Drawing.Point(87, 10);
             this.txtFieldName.Name = "txtFieldName";
-            this.txtFieldName.Size = new System.Drawing.Size(366, 20);
+            this.txtFieldName.Size = new System.Drawing.Size(160, 20);
             this.txtFieldName.TabIndex = 2;
             this.txtFieldName.TextChanged += new System.EventHandler(this.txtFieldName_TextChanged);
             // 
@@ -165,12 +170,59 @@ namespace PDF_Data
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.txtPreview);
             this.panel1.Controls.Add(this.pbPreview);
             this.panel1.Location = new System.Drawing.Point(12, 96);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(776, 345);
             this.panel1.TabIndex = 6;
+            // 
+            // txtPageFrom
+            // 
+            this.txtPageFrom.Location = new System.Drawing.Point(322, 10);
+            this.txtPageFrom.Name = "txtPageFrom";
+            this.txtPageFrom.Size = new System.Drawing.Size(39, 20);
+            this.txtPageFrom.TabIndex = 2;
+            this.txtPageFrom.Text = "1";
+            this.txtPageFrom.TextChanged += new System.EventHandler(this.txtFieldName_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(253, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Pages from:";
+            // 
+            // txtPagesTo
+            // 
+            this.txtPagesTo.Location = new System.Drawing.Point(396, 10);
+            this.txtPagesTo.Name = "txtPagesTo";
+            this.txtPagesTo.Size = new System.Drawing.Size(39, 20);
+            this.txtPagesTo.TabIndex = 2;
+            this.txtPagesTo.Text = "-1";
+            this.txtPagesTo.TextChanged += new System.EventHandler(this.txtFieldName_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(367, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(23, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "To:";
+            // 
+            // txtPreview
+            // 
+            this.txtPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPreview.Location = new System.Drawing.Point(620, 0);
+            this.txtPreview.Name = "txtPreview";
+            this.txtPreview.Size = new System.Drawing.Size(156, 345);
+            this.txtPreview.TabIndex = 5;
+            this.txtPreview.Text = "";
             // 
             // frmAddField
             // 
@@ -180,6 +232,10 @@ namespace PDF_Data
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtPagesTo);
+            this.Controls.Add(this.txtPageFrom);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtFieldName);
             this.Controls.Add(this.groupBox1);
@@ -209,5 +265,10 @@ namespace PDF_Data
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox txtPageFrom;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtPagesTo;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RichTextBox txtPreview;
     }
 }

@@ -24,26 +24,36 @@ namespace PDF_Data
             return preview;
         }
 
-        public static Dictionary<string, string[]> GetFieldsDataFromFile(string filePath, List<FieldModel> fields)
+        public static Dictionary<string, string[]> GetFieldsDataFromFile(List<string> filePaths, List<FieldModel> fields)
         {
             Dictionary<string, string[]> data = new Dictionary<string, string[]>();
-            PdfDocument pdfDoc = new PdfDocument(new PdfReader(filePath));
-            foreach (FieldModel fm in fields)
+            foreach (string filePath in filePaths)
             {
-                data[fm.Name] = GetFieldDataFromPdf(pdfDoc, fm);
+                PdfDocument pdfDoc = new PdfDocument(new PdfReader(filePath));
+                foreach (FieldModel fm in fields)
+                {
+                    data[fm.Name] = GetDataFromPdfByArea(pdfDoc, fm.DataRegion, fm.FirstPage, fm.LastPage);
+                }
             }
             return data;
         }
 
-        public static string[] GetFieldDataFromPdf(PdfDocument pdfDoc, FieldModel fm)
+        public static Dictionary<string, string[]> GetFieldsDataFromFile(List<string> filePaths, FieldModel field)
         {
-            if (fm.Page == FieldModel.PageLocation.ALL) return GetDataFromPdfByArea(pdfDoc, fm.DataArea);
-            if (fm.Page == FieldModel.PageLocation.COVER) return GetDataFromPdfByArea(pdfDoc, fm.DataArea, 1, 1);
-            if (fm.Page == FieldModel.PageLocation.RANGE) return GetDataFromPdfByArea(pdfDoc, fm.DataArea, fm.FirstPage, fm.LastPage);
-            return null;
+            Dictionary<string, string[]> data = new Dictionary<string, string[]>();
+            foreach (string filePath in filePaths)
+            {
+                data[field.Name] = GetDataFromPdfByArea(GetPdf(filePath), field.DataRegion, field.FirstPage, field.LastPage);
+            }
+            return data;
         }
 
-        private static string[] GetDataFromPdfByArea(PdfDocument pdfDoc, Rectangle r, int pageFrom = 1, int pageTo = -1)
+        public static PdfDocument GetPdf(string filePath)
+        {
+            return new PdfDocument(new PdfReader(filePath));
+        }
+
+        public static string[] GetDataFromPdfByArea(PdfDocument pdfDoc, Rectangle r, int pageFrom = 1, int pageTo = -1)
         {
             iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(
                 PointToPixel(r.X),

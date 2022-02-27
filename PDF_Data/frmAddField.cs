@@ -51,9 +51,14 @@ namespace PDF_Data
 
         private void ValidateForm()
         {
-            btnSave.Enabled = (
+            bool isValid = (
                 CheckFieldName(txtFieldName.Text) &&
                 (lines.Count == 4));
+            btnSave.Enabled = isValid;
+            if (isValid)
+            {
+                txtPreview.Text = String.Join("\n", PdfUtil.GetDataFromPdfByArea(parent.FilePreview.pdfDoc, GetRecatngle()));
+            }
         }
 
         #region Events
@@ -81,7 +86,7 @@ namespace PDF_Data
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            parent.AddField(new FieldModel(txtFieldName.Text, FieldModel.PageLocation.COVER, GetRecatngle()));
+            parent.AddField(new FieldModel(txtFieldName.Text, GetRecatngle(), int.Parse(txtPageFrom.Text), int.Parse(txtPagesTo.Text)));
             Close();
         }
 

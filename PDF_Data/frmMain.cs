@@ -12,12 +12,16 @@ namespace PDF_Data
     {
         private Image preview;
         private List<FieldModel> fields;
+        private List<string> filePaths;
+        public FileManager FilePreview { get; private set; }
 
         private string filePath = "C:\\Users\\Ardavan\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf";
 
         public frmMain()
         {
             InitializeComponent();
+            filePaths = new List<string>(new string[] { "C:\\Users\\Ardavan\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf" });
+            FilePreview = new FileManager(filePaths[0]);
             fields = new List<FieldModel>();
         }
 
@@ -29,7 +33,12 @@ namespace PDF_Data
 
         private void RenderFields()
         {
-
+            var data = PdfUtil.GetFieldsDataFromFile(filePaths, fields);
+            lbFields.Items.Clear();
+            foreach (var item in fields)
+            {
+                lbFields.Items.Add(item.Name);
+            }
         }
 
         #region Events
@@ -37,15 +46,18 @@ namespace PDF_Data
         {
 
             //frmAddField addField = new frmAddField(this, PdfUtil.GetPteview("C:\\Users\\Ardavan\\OneDrive - Georgia State University\\DICE\\OSM Queries.pdf"));
-            frmAddField addField = new frmAddField(this, PdfUtil.GetPteview(filePath));
+            frmAddField addField = new frmAddField(this, PdfUtil.GetPteview(filePaths[0]));
             addField.ShowDialog();
         }
 
         private void btnImportList_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "PDF files (*.pdf)|*.pdf|List of files (*.txt)|*.txt";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string path = openFileDialog1.FileName;
+                // TODO: set filePaths according to dialog insert type
+
             }
         }
 
@@ -63,5 +75,10 @@ namespace PDF_Data
             }
         }
         #endregion
+
+        private void lbFields_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtPreviewData.Text = "33";
+        }
     }
 }
