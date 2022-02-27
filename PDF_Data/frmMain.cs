@@ -29,11 +29,7 @@ namespace PDF_Data
 
         private void RenderFields()
         {
-            foreach (FieldModel fm in fields)
-            {
-                Console.WriteLine(fm.DataArea);
-                string[] res = PdfUtil.GetDataFromPdfByArea(filePath, fm.DataArea);
-            }
+
         }
 
         #region Events

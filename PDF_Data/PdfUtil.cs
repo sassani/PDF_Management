@@ -1,21 +1,11 @@
-﻿using iText.Kernel.Pdf;
+﻿using Ghostscript.NET.Rasterizer;
+using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser;
 using iText.Kernel.Pdf.Canvas.Parser.Filter;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
-//using org.pdfclown.documents;
-//using org.pdfclown.files;
-//using org.pdfclown.tools;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Ghostscript.NET.Rasterizer;
-using PdfSharp;
-using PdfSharp.Drawing;
-//using PdfSharp.Pdf;
-//using PdfSharp.Pdf.IO;
 
 namespace PDF_Data
 {
@@ -34,9 +24,27 @@ namespace PDF_Data
             return preview;
         }
 
-        public static string[] GetDataFromPdfByArea(string filePath, Rectangle r)
+        public static Dictionary<string, string[]> GetFieldsDataFromFile(string filePath, List<FieldModel> fields)
         {
+            Dictionary<string, string[]> data = new Dictionary<string, string[]>();
             PdfDocument pdfDoc = new PdfDocument(new PdfReader(filePath));
+            foreach (FieldModel fm in fields)
+            {
+                data[fm.Name] = GetFieldDataFromPdf(pdfDoc, fm);
+            }
+            return data;
+        }
+
+        public static string[] GetFieldDataFromPdf(PdfDocument pdfDoc, FieldModel fm)
+        {
+            if (fm.Page == FieldModel.PageLocation.ALL) return GetDataFromPdfByArea(pdfDoc, fm.DataArea);
+            if (fm.Page == FieldModel.PageLocation.COVER) return GetDataFromPdfByArea(pdfDoc, fm.DataArea, 1, 1);
+            if (fm.Page == FieldModel.PageLocation.RANGE) return GetDataFromPdfByArea(pdfDoc, fm.DataArea, fm.FirstPage, fm.LastPage);
+            return null;
+        }
+
+        private static string[] GetDataFromPdfByArea(PdfDocument pdfDoc, Rectangle r, int pageFrom = 1, int pageTo = -1)
+        {
             iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(
                 PointToPixel(r.X),
                 PointToPixel(r.Y),
@@ -45,7 +53,9 @@ namespace PDF_Data
                 );
             TextRegionEventFilter regionFilter = new TextRegionEventFilter(rect);
             StringBuilder sb = new StringBuilder();
-            for (int i = 1; i <= pdfDoc.GetNumberOfPages(); i++)
+            int lastPage = pdfDoc.GetNumberOfPages();
+            if (pageTo > 0) lastPage = pageTo;
+            for (int i = pageFrom; i <= lastPage; i++)
             {
                 string data = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(i), new FilteredTextEventListener(new LocationTextExtractionStrategy(), regionFilter));
                 sb.AppendLine(data);

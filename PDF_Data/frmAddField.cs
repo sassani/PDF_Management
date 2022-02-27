@@ -81,7 +81,7 @@ namespace PDF_Data
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            parent.AddField(new FieldModel(txtFieldName.Text, FieldModel.FieldTypes.FIXED, GetRecatngle()));
+            parent.AddField(new FieldModel(txtFieldName.Text, FieldModel.PageLocation.COVER, GetRecatngle()));
             Close();
         }
 
