@@ -40,11 +40,13 @@ namespace PDF_Data
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtPreview = new System.Windows.Forms.RichTextBox();
             this.txtPageFrom = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtPagesTo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtPreview = new System.Windows.Forms.RichTextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbType = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
             this.panel1.SuspendLayout();
@@ -70,7 +72,7 @@ namespace PDF_Data
             this.groupBox1.Controls.Add(this.rbLeft);
             this.groupBox1.Location = new System.Drawing.Point(12, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(423, 54);
+            this.groupBox1.Size = new System.Drawing.Size(575, 54);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Boundaries";
@@ -178,6 +180,16 @@ namespace PDF_Data
             this.panel1.Size = new System.Drawing.Size(776, 345);
             this.panel1.TabIndex = 6;
             // 
+            // txtPreview
+            // 
+            this.txtPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPreview.Location = new System.Drawing.Point(620, 0);
+            this.txtPreview.Name = "txtPreview";
+            this.txtPreview.Size = new System.Drawing.Size(156, 345);
+            this.txtPreview.TabIndex = 5;
+            this.txtPreview.Text = "";
+            // 
             // txtPageFrom
             // 
             this.txtPageFrom.Location = new System.Drawing.Point(322, 10);
@@ -214,21 +226,29 @@ namespace PDF_Data
             this.label3.TabIndex = 3;
             this.label3.Text = "To:";
             // 
-            // txtPreview
+            // label4
             // 
-            this.txtPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPreview.Location = new System.Drawing.Point(620, 0);
-            this.txtPreview.Name = "txtPreview";
-            this.txtPreview.Size = new System.Drawing.Size(156, 345);
-            this.txtPreview.TabIndex = 5;
-            this.txtPreview.Text = "";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(441, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Field Type:";
+            // 
+            // cbType
+            // 
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Location = new System.Drawing.Point(506, 9);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(81, 21);
+            this.cbType.TabIndex = 7;
             // 
             // frmAddField
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbType);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
@@ -236,6 +256,7 @@ namespace PDF_Data
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPagesTo);
             this.Controls.Add(this.txtPageFrom);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtFieldName);
             this.Controls.Add(this.groupBox1);
@@ -270,5 +291,7 @@ namespace PDF_Data
         private System.Windows.Forms.TextBox txtPagesTo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox txtPreview;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbType;
     }
 }

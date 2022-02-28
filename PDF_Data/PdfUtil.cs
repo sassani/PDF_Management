@@ -3,9 +3,12 @@ using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser;
 using iText.Kernel.Pdf.Canvas.Parser.Filter;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PDF_Data
 {
@@ -24,33 +27,125 @@ namespace PDF_Data
             return preview;
         }
 
+        public static async Task<DataTable> GetDataTableAsync(List<string> filePaths, List<FieldModel> fields)
+        {
+            DataTable dt = new DataTable("extracted_data");
+            foreach (var field in fields)
+            {
+                dt.Columns.Add(field.Name);
+            }
+            try
+            {
+                foreach (string filePath in filePaths)
+                {
+                    PdfDocument pdfDoc = await GetPdfAsync(filePath);
+                    var data = await GetFieldsDataFromFile (filePath, fields);
+                    int maxDataCount = GetMAxDataCount(data);
+                    for (int i = 0; i < maxDataCount; i++)
+                    {
+                        DataRow newRow = dt.NewRow();
+                        foreach (FieldModel field in fields)
+                        {
+                            String[] fieldData = data[field.Name];
+                            if (fieldData.Length >= maxDataCount)
+                            {
+                                newRow[field.Name] = fieldData.GetValue(i);
+                            }
+                            else
+                            {
+                                newRow[field.Name] = fieldData.GetValue(fieldData.Length - 1);
+                            }
+                        }
+                        dt.Rows.Add(newRow);
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.Message);
+            }
+            return dt;
+        }
+
+        private static int GetMAxDataCount(Dictionary<string, string[]> data)
+        {
+            int max = 0;
+            foreach (var item in data.Keys)
+            {
+                if (max < data[item].Length) max = data[item].Length;
+            }
+            return max;
+        }
+
         public static Dictionary<string, string[]> GetFieldsDataFromFile(List<string> filePaths, List<FieldModel> fields)
+        {
+            Dictionary<string, string[]> data = new Dictionary<string, string[]>();
+            try
+            {
+                foreach (string filePath in filePaths)
+                {
+                    PdfDocument pdfDoc = new PdfDocument(new PdfReader(filePath));
+                    foreach (FieldModel fm in fields)
+                    {
+                        data[fm.Name] = GetDataFromPdfByArea(pdfDoc, fm.DataRegion, fm.FirstPage, fm.LastPage);
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.Message);
+            }
+            return data;
+
+
+        }
+
+        public static async Task<Dictionary<string, string[]>> GetFieldsDataFromFile(List<string> filePaths, FieldModel field)
         {
             Dictionary<string, string[]> data = new Dictionary<string, string[]>();
             foreach (string filePath in filePaths)
             {
-                PdfDocument pdfDoc = new PdfDocument(new PdfReader(filePath));
-                foreach (FieldModel fm in fields)
-                {
-                    data[fm.Name] = GetDataFromPdfByArea(pdfDoc, fm.DataRegion, fm.FirstPage, fm.LastPage);
-                }
+                data[field.Name] = GetDataFromPdfByArea(await GetPdfAsync(filePath), field.DataRegion, field.FirstPage, field.LastPage);
             }
             return data;
         }
 
-        public static Dictionary<string, string[]> GetFieldsDataFromFile(List<string> filePaths, FieldModel field)
+        public static async Task<Dictionary<string, string[]>> GetFieldsDataFromFile(string filePath, List<FieldModel> fields)
         {
             Dictionary<string, string[]> data = new Dictionary<string, string[]>();
-            foreach (string filePath in filePaths)
+            foreach (var field in fields)
             {
-                data[field.Name] = GetDataFromPdfByArea(GetPdf(filePath), field.DataRegion, field.FirstPage, field.LastPage);
+                data[field.Name] = GetDataFromPdfByArea(await GetPdfAsync(filePath), field.DataRegion, field.FirstPage, field.LastPage);
             }
             return data;
+        }
+
+        public static async Task<PdfDocument> GetPdfAsync(string filePath)
+        {
+            try
+            {
+                return await Task.Run(()=> new PdfDocument(new PdfReader(filePath)));
+            }
+            catch (Exception)
+            {
+
+                throw new Exception($"File Not Found {Environment.NewLine}({filePath})");
+            }
+
         }
 
         public static PdfDocument GetPdf(string filePath)
         {
-            return new PdfDocument(new PdfReader(filePath));
+            try
+            {
+                return  new PdfDocument(new PdfReader(filePath));
+            }
+            catch (Exception)
+            {
+
+                throw new Exception($"File Not Found {Environment.NewLine}({filePath})");
+            }
+
         }
 
         public static string[] GetDataFromPdfByArea(PdfDocument pdfDoc, Rectangle r, int pageFrom = 1, int pageTo = -1)

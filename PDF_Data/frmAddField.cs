@@ -17,6 +17,8 @@ namespace PDF_Data
             this.image = image;
             pbPreview.Image = this.image;
             this.parent = parent;
+            cbType.Items.AddRange(FieldModel.GetTypes());
+            cbType.SelectedIndex = 0;
         }
 
         private void DrawLines()
@@ -86,7 +88,11 @@ namespace PDF_Data
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            parent.AddField(new FieldModel(txtFieldName.Text, GetRecatngle(), int.Parse(txtPageFrom.Text), int.Parse(txtPagesTo.Text)));
+            parent.AddField(new FieldModel(txtFieldName.Text,
+                GetRecatngle(),
+                (FieldModel.DataTypes)Enum.Parse(typeof(FieldModel.DataTypes), cbType.SelectedItem.ToString()),
+                int.Parse(txtPageFrom.Text),
+                int.Parse(txtPagesTo.Text)));
             Close();
         }
 

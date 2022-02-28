@@ -7,19 +7,15 @@ using System.Threading.Tasks;
 
 namespace PDF_Data
 {
-    public class FileManager
+    public class DataManager
     {
         public PdfDocument pdfDoc { get; private set; }
+        private string filePath;
 
-        public FileManager(string filePath)
+        public DataManager(string filePath)
         {
+            this.filePath = filePath;
             pdfDoc = PdfUtil.GetPdf(filePath);
-        }
-
-         
-
-
-
-
+        }   
     }
 }
