@@ -1,8 +1,11 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +34,32 @@ namespace PDF_Data
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            // TODO
+            openFileDialog1.Filter = "Comma separated file (*.csv)|*.csv";
+            openFileDialog1.AddExtension = true;
+            openFileDialog1.CheckFileExists = false;
+            openFileDialog1.FileName = "Export";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string path = openFileDialog1.FileName;
+                using (var writer = new StreamWriter(path))
+                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        csv.WriteField(dc.ColumnName);
+                    }
+                    csv.NextRecord();
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        foreach (DataColumn dc in dt.Columns)
+                        {
+                            csv.WriteField(dr[dc]);
+                        }
+                        csv.NextRecord();
+                    }
+                }
+            }
         }
     }
 }

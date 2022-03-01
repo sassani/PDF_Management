@@ -31,6 +31,7 @@ namespace PDF_Data
         {
             this.dgvExtractedData = new System.Windows.Forms.DataGridView();
             this.btnExport = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExtractedData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,6 +56,10 @@ namespace PDF_Data
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // frmExtractData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -74,5 +79,6 @@ namespace PDF_Data
 
         private System.Windows.Forms.DataGridView dgvExtractedData;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
