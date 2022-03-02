@@ -120,6 +120,36 @@ namespace PDF_Data
             frmExtractData extractData = new frmExtractData(filePaths, fields);
             extractData.ShowDialog();
         }
+
+        private void btnSaveFields_Click(object sender, EventArgs e)
+        {
+
+            string json = FieldModel.GetFieldsjason(fields);
+            openFileDialog1.Filter = "JavaScript Object Notation (*.json)|*.json";
+            openFileDialog1.AddExtension = true;
+            openFileDialog1.CheckFileExists = false;
+            openFileDialog1.FileName = "Fields";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string path = openFileDialog1.FileName;
+                using (var writer = new StreamWriter(path))
+                {
+                    writer.WriteLine(json);
+                }
+            }
+        }
+
+        private void btnImportFields_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "JavaScript Object Notation (*.json)|*.json";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = openFileDialog1.FileName;
+                string json = File.ReadAllText(fileName);
+                fields = FieldModel.GetListFromJson(json);
+                RenderFields();
+            }
+        }
         #endregion
     }
 }

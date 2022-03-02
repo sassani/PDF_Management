@@ -16,6 +16,6 @@ namespace PDF_Data
         {
             this.filePath = filePath;
             pdfDoc = PdfUtil.GetPdf(filePath);
-        }   
+        }
     }
 }

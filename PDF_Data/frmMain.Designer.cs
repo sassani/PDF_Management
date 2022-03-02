@@ -34,13 +34,15 @@ namespace PDF_Data
             this.btnImportList = new System.Windows.Forms.Button();
             this.btnAddField = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lblError = new System.Windows.Forms.Label();
             this.lbFilesList = new System.Windows.Forms.ListBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.lblPageCount = new System.Windows.Forms.Label();
             this.lbFields = new System.Windows.Forms.ListBox();
             this.txtPreviewData = new System.Windows.Forms.RichTextBox();
-            this.lblPageCount = new System.Windows.Forms.Label();
-            this.lblError = new System.Windows.Forms.Label();
             this.btnExtractData = new System.Windows.Forms.Button();
+            this.btnSaveFields = new System.Windows.Forms.Button();
+            this.btnImportFields = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -110,6 +112,16 @@ namespace PDF_Data
             this.splitContainer1.SplitterDistance = 368;
             this.splitContainer1.TabIndex = 3;
             // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(3, 27);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(28, 13);
+            this.lblError.TabIndex = 2;
+            this.lblError.Text = "error";
+            // 
             // lbFilesList
             // 
             this.lbFilesList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -135,6 +147,8 @@ namespace PDF_Data
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.btnImportFields);
+            this.splitContainer2.Panel2.Controls.Add(this.btnSaveFields);
             this.splitContainer2.Panel2.Controls.Add(this.lbFields);
             this.splitContainer2.Panel2.Controls.Add(this.txtPreviewData);
             this.splitContainer2.Panel2.Controls.Add(this.btnExtractData);
@@ -142,6 +156,15 @@ namespace PDF_Data
             this.splitContainer2.Size = new System.Drawing.Size(756, 628);
             this.splitContainer2.SplitterDistance = 390;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // lblPageCount
+            // 
+            this.lblPageCount.AutoSize = true;
+            this.lblPageCount.Location = new System.Drawing.Point(3, 44);
+            this.lblPageCount.Name = "lblPageCount";
+            this.lblPageCount.Size = new System.Drawing.Size(35, 13);
+            this.lblPageCount.TabIndex = 2;
+            this.lblPageCount.Text = "label1";
             // 
             // lbFields
             // 
@@ -163,25 +186,6 @@ namespace PDF_Data
             this.txtPreviewData.TabIndex = 0;
             this.txtPreviewData.Text = "";
             // 
-            // lblPageCount
-            // 
-            this.lblPageCount.AutoSize = true;
-            this.lblPageCount.Location = new System.Drawing.Point(3, 44);
-            this.lblPageCount.Name = "lblPageCount";
-            this.lblPageCount.Size = new System.Drawing.Size(35, 13);
-            this.lblPageCount.TabIndex = 2;
-            this.lblPageCount.Text = "label1";
-            // 
-            // lblError
-            // 
-            this.lblError.AutoSize = true;
-            this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(3, 27);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(28, 13);
-            this.lblError.TabIndex = 2;
-            this.lblError.Text = "error";
-            // 
             // btnExtractData
             // 
             this.btnExtractData.Location = new System.Drawing.Point(10, 28);
@@ -192,6 +196,26 @@ namespace PDF_Data
             this.btnExtractData.Text = "Extract Data";
             this.btnExtractData.UseVisualStyleBackColor = true;
             this.btnExtractData.Click += new System.EventHandler(this.btnExtractData_Click);
+            // 
+            // btnSaveFields
+            // 
+            this.btnSaveFields.Location = new System.Drawing.Point(276, 28);
+            this.btnSaveFields.Name = "btnSaveFields";
+            this.btnSaveFields.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveFields.TabIndex = 3;
+            this.btnSaveFields.Text = "Save Fields";
+            this.btnSaveFields.UseVisualStyleBackColor = true;
+            this.btnSaveFields.Click += new System.EventHandler(this.btnSaveFields_Click);
+            // 
+            // btnImportFields
+            // 
+            this.btnImportFields.Location = new System.Drawing.Point(195, 28);
+            this.btnImportFields.Name = "btnImportFields";
+            this.btnImportFields.Size = new System.Drawing.Size(75, 23);
+            this.btnImportFields.TabIndex = 3;
+            this.btnImportFields.Text = "Import Fields";
+            this.btnImportFields.UseVisualStyleBackColor = true;
+            this.btnImportFields.Click += new System.EventHandler(this.btnImportFields_Click);
             // 
             // frmMain
             // 
@@ -229,6 +253,8 @@ namespace PDF_Data
         private System.Windows.Forms.Label lblPageCount;
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Button btnExtractData;
+        private System.Windows.Forms.Button btnImportFields;
+        private System.Windows.Forms.Button btnSaveFields;
     }
 }
 

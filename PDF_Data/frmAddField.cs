@@ -88,8 +88,9 @@ namespace PDF_Data
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Rectangle rect = GetRecatngle();
             parent.AddField(new FieldModel(txtFieldName.Text,
-                GetRecatngle(),
+                rect.X,rect.Y,rect.Width,rect.Height,                
                 (FieldModel.DataTypes)Enum.Parse(typeof(FieldModel.DataTypes), cbType.SelectedItem.ToString()),
                 int.Parse(txtPageFrom.Text),
                 int.Parse(txtPagesTo.Text)));
