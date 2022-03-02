@@ -10,8 +10,9 @@ namespace PDF_Data
         private IDictionary<string, BLine> lines = new Dictionary<string, BLine>();
         private Image image;
         private frmMain parent;
+        private string[] data;
 
-        public frmAddField(frmMain parent, Image image)
+        public frmAddField(frmMain parent, Image image, FieldModel currentField = null)
         {
             InitializeComponent();
             this.image = image;
@@ -19,6 +20,7 @@ namespace PDF_Data
             this.parent = parent;
             cbType.Items.AddRange(FieldModel.GetTypes());
             cbType.SelectedIndex = 0;
+            if (currentField != null) Initialize(currentField);
         }
 
         private void DrawLines()
@@ -45,6 +47,14 @@ namespace PDF_Data
             return rect;
         }
 
+        private void Initialize(FieldModel field)
+        {
+            lines["top"] = new BLine("top", new Point(0, field.Y), new Point(image.Width, field.Y), rbTop.ForeColor);
+            lines["bottom"] = new BLine("bottom", new Point(0, field.Y), new Point(image.Width, field.Y), rbTop.ForeColor);
+            lines["left"] = new BLine("left", new Point(field.X, 0), new Point(field.X, image.Height), rbLeft.ForeColor);
+            lines["right"] = new BLine("right", new Point(field.X, 0), new Point(field.X, image.Height), rbRight.ForeColor);
+        }
+
         private bool CheckFieldName(string name)
         {
             if (name != "") return true;
@@ -59,7 +69,8 @@ namespace PDF_Data
             btnSave.Enabled = isValid;
             if (isValid)
             {
-                txtPreview.Text = String.Join("\n", PdfUtil.GetDataFromPdfByArea(parent.PdfPreview.PdfDoc, GetRecatngle(), int.Parse(txtPageFrom.Text), int.Parse(txtPagesTo.Text)));
+                data = PdfUtil.GetDataFromPdfByArea(parent.PdfPreview.PdfDoc, GetRecatngle(), int.Parse(txtPageFrom.Text), int.Parse(txtPagesTo.Text));
+                txtPreview.Text = String.Join("\n", data);
             }
         }
 
@@ -89,9 +100,11 @@ namespace PDF_Data
         private void btnSave_Click(object sender, EventArgs e)
         {
             Rectangle rect = GetRecatngle();
-            parent.AddField(new FieldModel(txtFieldName.Text,
+            parent.AddField(new FieldModel(
+                txtFieldName.Text,
                 rect.X, rect.Y, rect.Width, rect.Height,
                 (FieldModel.DataTypes)Enum.Parse(typeof(FieldModel.DataTypes), cbType.SelectedItem.ToString()),
+                data,
                 int.Parse(txtPageFrom.Text),
                 int.Parse(txtPagesTo.Text)));
             Close();

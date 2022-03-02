@@ -40,11 +40,21 @@ namespace PDF_Data
 
         private void RenderFields()
         {
-            if (fields.Count > 0) btnExtractData.Enabled = true;
-            lbFields.Items.Clear();
-            foreach (var item in fields)
+            if (fields.Count > 0)
             {
-                lbFields.Items.Add(item.Name);
+                btnExtractData.Enabled = true;
+                lbFields.Items.Clear();
+                foreach (var item in fields)
+                {
+                    if (item.FieldData == null)
+                    {
+                        item.FieldData = PdfUtil.GetDataFromPdfByArea(PdfPreview.PdfDoc, item.DataRegion);
+                    }
+                    lbFields.Items.Add(item);
+                }
+                lbFields.DisplayMember = "Name";
+                lbFields.SelectedIndex = 0;
+                ShowFieldsData();
             }
         }
 
@@ -65,6 +75,13 @@ namespace PDF_Data
                 btnAddField.Enabled = false;
             }
 
+        }
+
+        private void ShowFieldsData()
+        {
+            FieldModel currentField = (FieldModel)lbFields.SelectedItem;
+
+            txtPreviewData.Text = String.Join("\n", currentField.FieldData);
         }
 
         #region Events
@@ -98,7 +115,7 @@ namespace PDF_Data
 
         private void lbFields_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtPreviewData.Text = "Under Construction!";
+            ShowFieldsData();
         }
 
         private void lbFilesList_SelectedIndexChanged(object sender, EventArgs e)
