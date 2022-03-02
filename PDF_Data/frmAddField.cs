@@ -59,7 +59,7 @@ namespace PDF_Data
             btnSave.Enabled = isValid;
             if (isValid)
             {
-                txtPreview.Text = String.Join("\n", PdfUtil.GetDataFromPdfByArea(parent.FilePreview.pdfDoc, GetRecatngle()));
+                txtPreview.Text = String.Join("\n", PdfUtil.GetDataFromPdfByArea(parent.PdfPreview.PdfDoc, GetRecatngle(), int.Parse(txtPageFrom.Text), int.Parse(txtPagesTo.Text)));
             }
         }
 
@@ -90,7 +90,7 @@ namespace PDF_Data
         {
             Rectangle rect = GetRecatngle();
             parent.AddField(new FieldModel(txtFieldName.Text,
-                rect.X,rect.Y,rect.Width,rect.Height,                
+                rect.X, rect.Y, rect.Width, rect.Height,
                 (FieldModel.DataTypes)Enum.Parse(typeof(FieldModel.DataTypes), cbType.SelectedItem.ToString()),
                 int.Parse(txtPageFrom.Text),
                 int.Parse(txtPagesTo.Text)));
@@ -105,6 +105,16 @@ namespace PDF_Data
         private void txtFieldName_TextChanged(object sender, EventArgs e)
         {
             ValidateForm();
+        }
+
+        private void panel1_Scroll(object sender, ScrollEventArgs e)
+        {
+            DrawLines();
+        }
+
+        private void panel1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            DrawLines();
         }
         #endregion
     }

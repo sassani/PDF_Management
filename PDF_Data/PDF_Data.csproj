@@ -159,7 +159,6 @@
     <Compile Include="frmExtractData.Designer.cs">
       <DependentUpon>frmExtractData.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataManager.cs" />
     <Compile Include="frmAddField.cs">
       <SubType>Form</SubType>
     </Compile>

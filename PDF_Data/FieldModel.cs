@@ -21,24 +21,10 @@ namespace PDF_Data
         public int Width { get; set; }
         public int Height { get; set; }
 
-        //public FieldModel(string name, Rectangle rect, DataTypes type, int firstPage = 1, int lastPage = -1)
-        //{
-        //    Name = name;
-        //    DataRegion = rect;
-        //    FirstPage = firstPage;
-        //    LastPage = lastPage;
-        //    Type = type;
-        //    X = rect.X;
-        //    Y = rect.Y;
-        //    width = rect.Width;
-        //    Height = rect.Height;
-        //}
-
         public static string[] GetTypes()
         {
             return Enum.GetNames(typeof(DataTypes));
         }
-
 
         public static string GetFieldsjason(List<FieldModel> fields)
         {

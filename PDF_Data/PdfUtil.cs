@@ -15,6 +15,17 @@ namespace PDF_Data
     public class PdfUtil
     {
         private static readonly int RESOLUTION = 150;
+        public PdfDocument PdfDoc { get; set; }
+        public string PreviewPath { get; set; }
+        public int PageNumber { get; set; }
+
+
+        public PdfUtil(string fileName)
+        {
+            PreviewPath = fileName;
+            PdfDoc = GetPdf(PreviewPath);
+            PageNumber = PdfDoc.GetNumberOfPages();
+        }
 
         public static Image GetPteview(string filePath)
         {
@@ -158,12 +169,19 @@ namespace PDF_Data
                 );
             TextRegionEventFilter regionFilter = new TextRegionEventFilter(rect);
             StringBuilder sb = new StringBuilder();
-            int lastPage = pdfDoc.GetNumberOfPages();
-            if (pageTo > 0) lastPage = pageTo;
-            for (int i = pageFrom; i <= lastPage; i++)
+            try
             {
-                string data = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(i), new FilteredTextEventListener(new LocationTextExtractionStrategy(), regionFilter));
-                sb.AppendLine(data);
+                int lastPage = pdfDoc.GetNumberOfPages();
+                if (pageTo > 0) lastPage = pageTo;
+                for (int i = pageFrom; i <= lastPage; i++)
+                {
+                    string data = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(i), new FilteredTextEventListener(new LocationTextExtractionStrategy(), regionFilter));
+                    sb.AppendLine(data);
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.Message);
             }
             return sb.ToString().Remove(sb.Length - 2).Split('\n');
         }

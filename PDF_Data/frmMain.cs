@@ -11,7 +11,8 @@ namespace PDF_Data
         private List<FieldModel> fields;
         private List<string> filePaths;
         private string previewFilePath;
-        public DataManager FilePreview { get; private set; }
+        public PdfUtil PdfPreview { get; set; }
+
         private readonly string PAGE_C = "Page count: ";
 
         public frmMain()
@@ -22,12 +23,13 @@ namespace PDF_Data
             filePaths = new List<string>(new string[] { "C:\\Users\\asassani1\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf" });
             previewFilePath = filePaths[0];
             lbFilesList.Items.AddRange(filePaths.ToArray());
-            FilePreview = new DataManager(previewFilePath);
+            PdfPreview = new PdfUtil(previewFilePath);
+            lbFilesList.SelectedIndex = 0;
+            RenderPreview();
             /// -------------------------------
             lblError.Text = "";
             lblPageCount.Text = PAGE_C;
             fields = new List<FieldModel>();
-            RenderPreview();
         }
 
         public void AddField(FieldModel fm)
@@ -39,7 +41,6 @@ namespace PDF_Data
         private void RenderFields()
         {
             if (fields.Count > 0) btnExtractData.Enabled = true;
-            //var data = PdfUtil.GetFieldsDataFromFile(filePaths, fields);
             lbFields.Items.Clear();
             foreach (var item in fields)
             {
@@ -49,12 +50,12 @@ namespace PDF_Data
 
         private void RenderPreview()
         {
+            previewFilePath = lbFilesList.SelectedItem.ToString();
             lblError.Text = "";
             try
             {
-                wb.Url = new Uri(previewFilePath);
-                FilePreview = new DataManager(previewFilePath);
-                lblPageCount.Text = PAGE_C + FilePreview.pdfDoc.GetNumberOfPages();
+                wb.Url = new Uri(PdfPreview.PreviewPath);
+                lblPageCount.Text = PAGE_C + PdfPreview.PdfDoc.GetNumberOfPages();
                 btnAddField.Enabled = true;
             }
             catch (Exception err)
@@ -90,6 +91,9 @@ namespace PDF_Data
             }
             filePaths = fileNames.ToList();
             lbFilesList.Items.AddRange(fileNames);
+            lbFilesList.SelectedIndex = 0;
+            PdfPreview = new PdfUtil(filePaths[0]);
+            RenderPreview();
         }
 
         private void lbFields_SelectedIndexChanged(object sender, EventArgs e)

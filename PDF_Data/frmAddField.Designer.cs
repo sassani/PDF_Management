@@ -179,6 +179,8 @@ namespace PDF_Data
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(776, 345);
             this.panel1.TabIndex = 6;
+            this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
+            this.panel1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseWheel);
             // 
             // txtPreview
             // 
