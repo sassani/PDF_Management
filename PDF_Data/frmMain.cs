@@ -19,7 +19,7 @@ namespace PDF_Data
             InitializeComponent();
             btnExtractData.Enabled = false;
             /// TODO: remove this section tests
-            filePaths = new List<string>(new string[] { "C:\\Users\\asassani1\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf" });
+            filePaths = new List<string>(new string[] { "C:\\Users\\ardavan\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf" });
             previewFilePath = filePaths[0];
             lbFilesList.Items.AddRange(filePaths.ToArray());
             FilePreview = new DataManager(previewFilePath);
