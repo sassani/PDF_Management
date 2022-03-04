@@ -13,6 +13,8 @@ namespace PDF_Data
         public DataTypes Type { get; set; }
         [JsonIgnore]
         public Rectangle DataRegion { get; set; }
+        [JsonIgnore]
+        public string[] FieldData { get; set; }
         public int FirstPage { get; set; }
         public int LastPage { get; set; }
 
@@ -21,24 +23,10 @@ namespace PDF_Data
         public int Width { get; set; }
         public int Height { get; set; }
 
-        //public FieldModel(string name, Rectangle rect, DataTypes type, int firstPage = 1, int lastPage = -1)
-        //{
-        //    Name = name;
-        //    DataRegion = rect;
-        //    FirstPage = firstPage;
-        //    LastPage = lastPage;
-        //    Type = type;
-        //    X = rect.X;
-        //    Y = rect.Y;
-        //    width = rect.Width;
-        //    Height = rect.Height;
-        //}
-
         public static string[] GetTypes()
         {
             return Enum.GetNames(typeof(DataTypes));
         }
-
 
         public static string GetFieldsjason(List<FieldModel> fields)
         {
@@ -62,6 +50,20 @@ namespace PDF_Data
             Width = width;
             Height = height;
             DataRegion = new Rectangle(x, y, width, height);
+        }
+
+        public FieldModel(string name, int x, int y, int width, int height, DataTypes type, string[] data, int firstPage = 1, int lastPage = -1)
+        {
+            Name = name;
+            FirstPage = firstPage;
+            LastPage = lastPage;
+            Type = type;
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
+            DataRegion = new Rectangle(x, y, width, height);
+            FieldData = data;
         }
     }
 }

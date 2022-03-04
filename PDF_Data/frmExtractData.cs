@@ -18,6 +18,7 @@ namespace PDF_Data
         private List<FieldModel> fields;
         private List<string> filePaths;
         private DataTable dt = new DataTable();
+
         public frmExtractData(List<string> filePaths, List<FieldModel> fields)
         {
             InitializeComponent();
