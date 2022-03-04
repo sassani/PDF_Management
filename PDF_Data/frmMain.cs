@@ -65,6 +65,7 @@ namespace PDF_Data
             try
             {
                 wb.Url = new Uri(PdfPreview.PreviewPath);
+               
                 lblPageCount.Text = PAGE_C + PdfPreview.PdfDoc.GetNumberOfPages();
                 btnAddField.Enabled = true;
             }
@@ -87,7 +88,7 @@ namespace PDF_Data
         #region Events
         private void btnAddField_Click(object sender, EventArgs e)
         {
-            frmAddField addField = new frmAddField(this, PdfUtil.GetPteview(previewFilePath));
+            frmAddField addField = new frmAddField(this, PdfUtil.GetPteview(previewFilePath, int.Parse(txtPage.Text)));
             addField.ShowDialog();
         }
 

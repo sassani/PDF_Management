@@ -27,13 +27,13 @@ namespace PDF_Data
             PageNumber = PdfDoc.GetNumberOfPages();
         }
 
-        public static Image GetPteview(string filePath)
+        public static Image GetPteview(string filePath, int page=1)
         {
             Image preview = new Bitmap(10, 10);
             using (GhostscriptRasterizer rasterizer = new GhostscriptRasterizer())
             {
                 rasterizer.Open(filePath);
-                preview = rasterizer.GetPage(RESOLUTION, 1);
+                preview = rasterizer.GetPage(RESOLUTION, page);
             }
             return preview;
         }
