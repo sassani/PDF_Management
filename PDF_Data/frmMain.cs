@@ -20,12 +20,12 @@ namespace PDF_Data
             InitializeComponent();
             btnExtractData.Enabled = false;
             /// TODO: remove this section tests
-            filePaths = new List<string>(new string[] { "C:\\Users\\ardavan\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf" });
-            previewFilePath = filePaths[0];
-            lbFilesList.Items.AddRange(filePaths.ToArray());
-            PdfPreview = new PdfUtil(previewFilePath);
-            lbFilesList.SelectedIndex = 0;
-            RenderPreview();
+            //filePaths = new List<string>(new string[] { "C:\\Users\\ardavan\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf" });
+            //previewFilePath = filePaths[0];
+            //lbFilesList.Items.AddRange(filePaths.ToArray());
+            //PdfPreview = new PdfUtil(previewFilePath);
+            //lbFilesList.SelectedIndex = 0;
+            //RenderPreview();
             /// -------------------------------
             lblError.Text = "";
             lblPageCount.Text = PAGE_C;
@@ -64,8 +64,8 @@ namespace PDF_Data
             lblError.Text = "";
             try
             {
-                wb.Url = new Uri(PdfPreview.PreviewPath);
-               
+                //wb.Url = new Uri(PdfPreview.PreviewPath);
+                wb.Url = new Uri(previewFilePath);
                 lblPageCount.Text = PAGE_C + PdfPreview.PdfDoc.GetNumberOfPages();
                 btnAddField.Enabled = true;
             }
@@ -92,6 +92,12 @@ namespace PDF_Data
             addField.ShowDialog();
         }
 
+        private void lbFields_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            frmAddField addField = new frmAddField(this, PdfUtil.GetPteview(previewFilePath, int.Parse(txtPage.Text)), (FieldModel)lbFields.SelectedItem);
+            addField.ShowDialog();
+        }
+
         private void btnImportList_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "PDF files (*.pdf)|*.pdf|List of files (*.txt)|*.txt";
@@ -109,8 +115,8 @@ namespace PDF_Data
             }
             filePaths = fileNames.ToList();
             lbFilesList.Items.AddRange(fileNames);
-            lbFilesList.SelectedIndex = 0;
             PdfPreview = new PdfUtil(filePaths[0]);
+            lbFilesList.SelectedIndex = 0;
             RenderPreview();
         }
 
@@ -121,6 +127,8 @@ namespace PDF_Data
 
         private void lbFilesList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Console.WriteLine("test");
+
             try
             {
                 string temp = "";
@@ -131,9 +139,9 @@ namespace PDF_Data
                     RenderPreview();
                 }
             }
-            catch (Exception)
+            catch (Exception err)
             {
-                throw;
+                Console.WriteLine(err);
             }
         }
 
@@ -172,6 +180,16 @@ namespace PDF_Data
                 RenderFields();
             }
         }
+
         #endregion
+
+        private void lbFields_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                Console.WriteLine(lbFields.SelectedItem);
+
+            }
+        }
     }
 }

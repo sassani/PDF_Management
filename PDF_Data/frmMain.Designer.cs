@@ -59,10 +59,10 @@ namespace PDF_Data
             this.wb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.wb.Location = new System.Drawing.Point(0, 41);
+            this.wb.Location = new System.Drawing.Point(0, 53);
             this.wb.MinimumSize = new System.Drawing.Size(20, 20);
             this.wb.Name = "wb";
-            this.wb.Size = new System.Drawing.Size(556, 576);
+            this.wb.Size = new System.Drawing.Size(697, 564);
             this.wb.TabIndex = 1;
             // 
             // openFileDialog1
@@ -96,7 +96,7 @@ namespace PDF_Data
             // 
             this.lblError.AutoSize = true;
             this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(3, 25);
+            this.lblError.Location = new System.Drawing.Point(3, 36);
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(28, 13);
             this.lblError.TabIndex = 2;
@@ -107,17 +107,18 @@ namespace PDF_Data
             this.lbFilesList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbFilesList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbFilesList.FormattingEnabled = true;
-            this.lbFilesList.Location = new System.Drawing.Point(0, 41);
+            this.lbFilesList.Location = new System.Drawing.Point(0, 54);
             this.lbFilesList.Name = "lbFilesList";
-            this.lbFilesList.Size = new System.Drawing.Size(417, 576);
+            this.lbFilesList.Size = new System.Drawing.Size(417, 561);
             this.lbFilesList.TabIndex = 3;
             this.lbFilesList.SelectedIndexChanged += new System.EventHandler(this.lbFilesList_SelectedIndexChanged);
             // 
             // lblPageCount
             // 
             this.lblPageCount.AutoSize = true;
-            this.lblPageCount.Location = new System.Drawing.Point(133, 14);
+            this.lblPageCount.Location = new System.Drawing.Point(3, 36);
             this.lblPageCount.Name = "lblPageCount";
             this.lblPageCount.Size = new System.Drawing.Size(35, 13);
             this.lblPageCount.TabIndex = 2;
@@ -125,7 +126,7 @@ namespace PDF_Data
             // 
             // txtPage
             // 
-            this.txtPage.Location = new System.Drawing.Point(79, 4);
+            this.txtPage.Location = new System.Drawing.Point(79, 2);
             this.txtPage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.txtPage.Name = "txtPage";
             this.txtPage.Size = new System.Drawing.Size(40, 20);
@@ -135,7 +136,7 @@ namespace PDF_Data
             // btnImportFields
             // 
             this.btnImportFields.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImportFields.Location = new System.Drawing.Point(253, 26);
+            this.btnImportFields.Location = new System.Drawing.Point(119, 26);
             this.btnImportFields.Name = "btnImportFields";
             this.btnImportFields.Size = new System.Drawing.Size(75, 23);
             this.btnImportFields.TabIndex = 3;
@@ -146,7 +147,7 @@ namespace PDF_Data
             // btnSaveFields
             // 
             this.btnSaveFields.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveFields.Location = new System.Drawing.Point(334, 26);
+            this.btnSaveFields.Location = new System.Drawing.Point(200, 26);
             this.btnSaveFields.Name = "btnSaveFields";
             this.btnSaveFields.Size = new System.Drawing.Size(75, 23);
             this.btnSaveFields.TabIndex = 3;
@@ -158,21 +159,25 @@ namespace PDF_Data
             // 
             this.lbFields.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbFields.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbFields.FormattingEnabled = true;
             this.lbFields.Location = new System.Drawing.Point(3, 53);
             this.lbFields.Name = "lbFields";
-            this.lbFields.Size = new System.Drawing.Size(413, 160);
+            this.lbFields.Size = new System.Drawing.Size(272, 158);
             this.lbFields.TabIndex = 2;
             this.lbFields.SelectedIndexChanged += new System.EventHandler(this.lbFields_SelectedIndexChanged);
+            this.lbFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFields_KeyDown);
+            this.lbFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbFields_MouseDoubleClick);
             // 
             // txtPreviewData
             // 
             this.txtPreviewData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPreviewData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPreviewData.Location = new System.Drawing.Point(3, 219);
             this.txtPreviewData.Name = "txtPreviewData";
-            this.txtPreviewData.Size = new System.Drawing.Size(413, 398);
+            this.txtPreviewData.Size = new System.Drawing.Size(272, 398);
             this.txtPreviewData.TabIndex = 0;
             this.txtPreviewData.Text = "";
             // 
@@ -197,7 +202,7 @@ namespace PDF_Data
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(419, 54);
+            this.panel1.Size = new System.Drawing.Size(278, 54);
             this.panel1.TabIndex = 4;
             // 
             // panel2
@@ -218,18 +223,18 @@ namespace PDF_Data
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(426, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(559, 617);
+            this.panel3.Size = new System.Drawing.Size(700, 617);
             this.panel3.TabIndex = 6;
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.lbFields);
             this.panel4.Controls.Add(this.panel1);
             this.panel4.Controls.Add(this.txtPreviewData);
-            this.panel4.Controls.Add(this.lbFields);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(991, 3);
+            this.panel4.Location = new System.Drawing.Point(1132, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(419, 617);
+            this.panel4.Size = new System.Drawing.Size(278, 617);
             this.panel4.TabIndex = 7;
             // 
             // tableLayoutPanel1
@@ -237,8 +242,8 @@ namespace PDF_Data
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel4, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 1, 0);

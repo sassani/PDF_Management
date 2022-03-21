@@ -20,7 +20,11 @@ namespace PDF_Data
             this.parent = parent;
             cbType.Items.AddRange(FieldModel.GetTypes());
             cbType.SelectedIndex = 0;
-            if (currentField != null) Initialize(currentField);
+            if (currentField != null)
+            {
+                Initialize(currentField);
+                DrawLines();
+            }
         }
 
         private void DrawLines()
@@ -42,7 +46,7 @@ namespace PDF_Data
             int w = Math.Abs(lines["left"].P1.X - lines["right"].P1.X);
             int h = Math.Abs(lines["top"].P1.Y - lines["bottom"].P1.Y);
             Point base1 = new Point(lines["left"].P1.X, image.Size.Height - lines["bottom"].P1.Y);// for y coordinate we need to change the direction. Base point is left_bottom instead of left_top
-            Point base2 = new Point(lines["left"].P1.X, lines["top"].P1.Y);
+            //Point base2 = new Point(lines["left"].P1.X, lines["top"].P1.Y);
             Rectangle rect = new Rectangle(base1, new Size(w, h));
             return rect;
         }
@@ -50,9 +54,10 @@ namespace PDF_Data
         private void Initialize(FieldModel field)
         {
             lines["top"] = new BLine("top", new Point(0, field.Y), new Point(image.Width, field.Y), rbTop.ForeColor);
-            lines["bottom"] = new BLine("bottom", new Point(0, field.Y), new Point(image.Width, field.Y), rbTop.ForeColor);
+            lines["bottom"] = new BLine("bottom", new Point(0, field.Y + field.Height), new Point(image.Width, field.Y + field.Height), rbTop.ForeColor);
             lines["left"] = new BLine("left", new Point(field.X, 0), new Point(field.X, image.Height), rbLeft.ForeColor);
-            lines["right"] = new BLine("right", new Point(field.X, 0), new Point(field.X, image.Height), rbRight.ForeColor);
+            lines["right"] = new BLine("right", new Point(field.X + field.Width, 0), new Point(field.X + field.Width, image.Height), rbRight.ForeColor);
+            txtFieldName.Text = field.Name;
         }
 
         private bool CheckFieldName(string name)
