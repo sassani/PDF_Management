@@ -8,10 +8,13 @@ namespace PDF_Data
     public partial class frmAddEditField : Form
     {
         private IDictionary<string, BLine> lines = new Dictionary<string, BLine>();
+        private Point[] points = new Point[2];
+        private Rectangle rectangle;
         private Image image;
         private frmMain parent;
         private string[] data;
         private string currentKey;
+        private int pCount = 0;
 
         public frmAddEditField(frmMain parent, Image image, string currentKey = null)
         {
@@ -23,7 +26,7 @@ namespace PDF_Data
             cbType.SelectedIndex = 0;
             this.currentKey = currentKey;
             if (currentKey != null)
-            {                
+            {
                 Initialize();
             }
         }
@@ -39,6 +42,22 @@ namespace PDF_Data
                     g.DrawLine(pen, line.P1, line.P2);
                 }
             }
+        }
+
+        private void DrawRectangle()
+        {
+            pbPreview.Refresh();
+            using (Graphics g = pbPreview.CreateGraphics())
+            {
+                //rectangle = new Rectangle(points[0], new Size(Math.Abs(points[0].X - points[1].X), Math.Abs(points[0].Y - points[1].Y)));
+                Pen pen = new Pen(Color.Aqua);
+                g.DrawRectangle(pen, rectangle);
+            }
+        }
+
+        private void ClearRectangle()
+        {
+            pbPreview.Refresh();
         }
 
         private Rectangle GetRecatngle()
@@ -60,7 +79,7 @@ namespace PDF_Data
             lines["left"] = new BLine("left", new Point(field.X, 0), new Point(field.X, image.Height), rbLeft.ForeColor);
             lines["right"] = new BLine("right", new Point(field.X + field.Width, 0), new Point(field.X + field.Width, image.Height), rbRight.ForeColor);
             txtFieldName.Text = field.Name;
-            DrawLines();
+            //DrawLines();
         }
 
         private bool CheckFieldName(string name)
@@ -109,8 +128,40 @@ namespace PDF_Data
             {
                 lines["right"] = new BLine("right", new Point(e.X, 0), new Point(e.X, image.Height), rbRight.ForeColor);
             }
-            DrawLines();
-            ValidateForm();
+
+            if (rbTL.Checked)
+            {
+                points[0] = e.Location;
+            }
+            if (rbBR.Checked)
+            {
+                points[1] = e.Location;
+            }
+
+            if (rbRect.Checked)
+            {
+                switch (pCount)
+                {
+                    case 0:
+                        points[0] = e.Location;
+                        pCount++;
+                        break;
+                    case 1:
+                        points[1] = e.Location;
+                        pCount++;
+                        rectangle = new Rectangle(points[0], new Size(Math.Abs(points[0].X - points[1].X), Math.Abs(points[0].Y - points[1].Y)));
+                        DrawRectangle();
+                        break;
+                    case 2:
+                        pCount = 0;
+                        ClearRectangle();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            //DrawLines();
+            //ValidateForm();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -148,12 +199,14 @@ namespace PDF_Data
 
         private void panel1_Scroll(object sender, ScrollEventArgs e)
         {
-            DrawLines();
+            //DrawLines();
+            DrawRectangle();
         }
 
         private void panel1_MouseWheel(object sender, MouseEventArgs e)
         {
-            DrawLines();
+            //DrawLines();
+            DrawRectangle();
         }
         #endregion
     }

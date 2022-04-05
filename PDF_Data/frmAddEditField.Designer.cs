@@ -47,6 +47,9 @@ namespace PDF_Data
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cbType = new System.Windows.Forms.ComboBox();
+            this.rbTL = new System.Windows.Forms.RadioButton();
+            this.rbBR = new System.Windows.Forms.RadioButton();
+            this.rbRect = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
             this.panel1.SuspendLayout();
@@ -66,6 +69,9 @@ namespace PDF_Data
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.rbBR);
+            this.groupBox1.Controls.Add(this.rbRect);
+            this.groupBox1.Controls.Add(this.rbTL);
             this.groupBox1.Controls.Add(this.rbTop);
             this.groupBox1.Controls.Add(this.rbRight);
             this.groupBox1.Controls.Add(this.rbBottom);
@@ -247,7 +253,40 @@ namespace PDF_Data
             this.cbType.Size = new System.Drawing.Size(81, 21);
             this.cbType.TabIndex = 7;
             // 
-            // frmAddField
+            // rbTL
+            // 
+            this.rbTL.AutoSize = true;
+            this.rbTL.Location = new System.Drawing.Point(409, 24);
+            this.rbTL.Name = "rbTL";
+            this.rbTL.Size = new System.Drawing.Size(65, 17);
+            this.rbTL.TabIndex = 1;
+            this.rbTL.TabStop = true;
+            this.rbTL.Text = "Top-Left";
+            this.rbTL.UseVisualStyleBackColor = true;
+            // 
+            // rbBR
+            // 
+            this.rbBR.AutoSize = true;
+            this.rbBR.Location = new System.Drawing.Point(480, 24);
+            this.rbBR.Name = "rbBR";
+            this.rbBR.Size = new System.Drawing.Size(86, 17);
+            this.rbBR.TabIndex = 2;
+            this.rbBR.TabStop = true;
+            this.rbBR.Text = "Bottom-Right";
+            this.rbBR.UseVisualStyleBackColor = true;
+            // 
+            // rbRect
+            // 
+            this.rbRect.AutoSize = true;
+            this.rbRect.Location = new System.Drawing.Point(329, 24);
+            this.rbRect.Name = "rbRect";
+            this.rbRect.Size = new System.Drawing.Size(74, 17);
+            this.rbRect.TabIndex = 1;
+            this.rbRect.TabStop = true;
+            this.rbRect.Text = "Rectangle";
+            this.rbRect.UseVisualStyleBackColor = true;
+            // 
+            // frmAddEditField
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -264,7 +303,7 @@ namespace PDF_Data
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtFieldName);
             this.Controls.Add(this.groupBox1);
-            this.Name = "frmAddField";
+            this.Name = "frmAddEditField";
             this.Text = "AddField";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);
@@ -297,5 +336,8 @@ namespace PDF_Data
         private System.Windows.Forms.RichTextBox txtPreview;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbType;
+        private System.Windows.Forms.RadioButton rbBR;
+        private System.Windows.Forms.RadioButton rbTL;
+        private System.Windows.Forms.RadioButton rbRect;
     }
 }
