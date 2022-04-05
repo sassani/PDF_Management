@@ -5,14 +5,15 @@ using System.Windows.Forms;
 
 namespace PDF_Data
 {
-    public partial class frmAddField : Form
+    public partial class frmAddEditField : Form
     {
         private IDictionary<string, BLine> lines = new Dictionary<string, BLine>();
         private Image image;
         private frmMain parent;
         private string[] data;
+        private string currentKey;
 
-        public frmAddField(frmMain parent, Image image, FieldModel currentField = null)
+        public frmAddEditField(frmMain parent, Image image, string currentKey = null)
         {
             InitializeComponent();
             this.image = image;
@@ -20,10 +21,10 @@ namespace PDF_Data
             this.parent = parent;
             cbType.Items.AddRange(FieldModel.GetTypes());
             cbType.SelectedIndex = 0;
-            if (currentField != null)
-            {
-                Initialize(currentField);
-                DrawLines();
+            this.currentKey = currentKey;
+            if (currentKey != null)
+            {                
+                Initialize();
             }
         }
 
@@ -51,13 +52,15 @@ namespace PDF_Data
             return rect;
         }
 
-        private void Initialize(FieldModel field)
+        private void Initialize()
         {
-            lines["top"] = new BLine("top", new Point(0, field.Y), new Point(image.Width, field.Y), rbTop.ForeColor);
-            lines["bottom"] = new BLine("bottom", new Point(0, field.Y + field.Height), new Point(image.Width, field.Y + field.Height), rbTop.ForeColor);
+            FieldModel field = parent.GetField(currentKey);
+            lines["top"] = new BLine("top", new Point(0, field.Height + field.Y), new Point(image.Width, field.Height + field.Y), rbTop.ForeColor);
+            lines["bottom"] = new BLine("bottom", new Point(0, field.Y), new Point(image.Width, field.Y), rbBottom.ForeColor);
             lines["left"] = new BLine("left", new Point(field.X, 0), new Point(field.X, image.Height), rbLeft.ForeColor);
             lines["right"] = new BLine("right", new Point(field.X + field.Width, 0), new Point(field.X + field.Width, image.Height), rbRight.ForeColor);
             txtFieldName.Text = field.Name;
+            DrawLines();
         }
 
         private bool CheckFieldName(string name)
@@ -74,8 +77,16 @@ namespace PDF_Data
             btnSave.Enabled = isValid;
             if (isValid)
             {
-                data = PdfUtil.GetDataFromPdfByArea(parent.PdfPreview.PdfDoc, GetRecatngle(), int.Parse(txtPageFrom.Text), int.Parse(txtPagesTo.Text));
-                txtPreview.Text = String.Join("\n", data);
+                try
+                {
+                    data = PdfUtil.GetDataFromPdfByArea(parent.PdfPreview.PdfDoc, GetRecatngle(), int.Parse(txtPageFrom.Text), int.Parse(txtPagesTo.Text));
+                    txtPreview.Text = String.Join("\n", data);
+                }
+                catch (Exception err)
+                {
+
+                    Console.WriteLine(err.Message);
+                }
             }
         }
 
@@ -105,18 +116,28 @@ namespace PDF_Data
         private void btnSave_Click(object sender, EventArgs e)
         {
             Rectangle rect = GetRecatngle();
-            parent.AddField(new FieldModel(
-                txtFieldName.Text,
-                rect.X, rect.Y, rect.Width, rect.Height,
-                (FieldModel.DataTypes)Enum.Parse(typeof(FieldModel.DataTypes), cbType.SelectedItem.ToString()),
-                data,
-                int.Parse(txtPageFrom.Text),
-                int.Parse(txtPagesTo.Text)));
+            FieldModel temp = new FieldModel(
+                    txtFieldName.Text,
+                    rect.X, rect.Y, rect.Width, rect.Height,
+                    (FieldModel.DataTypes)Enum.Parse(typeof(FieldModel.DataTypes), cbType.SelectedItem.ToString()),
+                    data,
+                    currentKey,
+                    int.Parse(txtPageFrom.Text),
+                    int.Parse(txtPagesTo.Text));
+            if (currentKey == null)
+            {
+                parent.AddField(temp);
+            }
+            else
+            {
+                parent.EditField(currentKey, temp);
+            }
             Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             Close();
         }
 

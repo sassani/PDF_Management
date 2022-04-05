@@ -8,7 +8,8 @@ namespace PDF_Data
 {
     public partial class frmMain : Form
     {
-        private List<FieldModel> fields;
+        //private List<FieldModel> fields__;
+        private Dictionary<string, FieldModel> fields;
         private List<string> filePaths;
         private string previewFilePath;
         public PdfUtil PdfPreview { get; set; }
@@ -19,43 +20,28 @@ namespace PDF_Data
         {
             InitializeComponent();
             btnExtractData.Enabled = false;
-            /// TODO: remove this section tests
-            //filePaths = new List<string>(new string[] { "C:\\Users\\ardavan\\OneDrive - Georgia State University\\DICE\\DengAI\\data\\DataCollection\\peru\\2020\\23.pdf" });
-            //previewFilePath = filePaths[0];
-            //lbFilesList.Items.AddRange(filePaths.ToArray());
-            //PdfPreview = new PdfUtil(previewFilePath);
-            //lbFilesList.SelectedIndex = 0;
-            //RenderPreview();
-            /// -------------------------------
             lblError.Text = "";
             lblPageCount.Text = PAGE_C;
-            fields = new List<FieldModel>();
+            //fields__ = new List<FieldModel>();
+            fields = new Dictionary<string, FieldModel>();
+        }
+
+        public FieldModel GetField(string key)
+        {
+            return fields[key];
         }
 
         public void AddField(FieldModel fm)
         {
-            fields.Add(fm);
-            RenderFields();
+            fm.Id = Guid.NewGuid().ToString();
+            fields.Add(fm.Id, fm);
+            PrintFields();
         }
 
-        private void RenderFields()
+        public void EditField(string key, FieldModel fm)
         {
-            if (fields.Count > 0)
-            {
-                btnExtractData.Enabled = true;
-                lbFields.Items.Clear();
-                foreach (var item in fields)
-                {
-                    if (item.FieldData == null)
-                    {
-                        item.FieldData = PdfUtil.GetDataFromPdfByArea(PdfPreview.PdfDoc, item.DataRegion);
-                    }
-                    lbFields.Items.Add(item);
-                }
-                lbFields.DisplayMember = "Name";
-                lbFields.SelectedIndex = 0;
-                ShowFieldsData();
-            }
+            fields[key] = fm;
+            PrintFields();
         }
 
         private void RenderPreview()
@@ -64,7 +50,6 @@ namespace PDF_Data
             lblError.Text = "";
             try
             {
-                //wb.Url = new Uri(PdfPreview.PreviewPath);
                 wb.Url = new Uri(previewFilePath);
                 lblPageCount.Text = PAGE_C + PdfPreview.PdfDoc.GetNumberOfPages();
                 btnAddField.Enabled = true;
@@ -78,28 +63,60 @@ namespace PDF_Data
 
         }
 
-        private void ShowFieldsData()
+        private void PrintFields(string name = null)
         {
-            FieldModel currentField = (FieldModel)lbFields.SelectedItem;
+            if (fields.Count > 0)
+            {
+                btnExtractData.Enabled = true;
+                lbFields.Items.Clear();
+                foreach (KeyValuePair<string, FieldModel> item in fields)
+                {
+                    lbFields.Items.Add(item.Value);
+                }
+                lbFields.DisplayMember = "Name";
+                lbFields.SelectedIndex = 0;
+                PrintFieldsData();
+            }
+        }
 
-            txtPreviewData.Text = String.Join("\n", currentField.FieldData);
+        private void PrintFieldsData()
+        {
+            FieldModel selectedField = (FieldModel)lbFields.SelectedItem;
+            if (selectedField.Data != null)
+                txtPreviewData.Text = String.Join("\n", selectedField.Data);
+        }
+
+        private void InitializeData(List<FieldModel> _fields)
+        {
+            foreach (FieldModel item in _fields)
+            {
+                item.Data = PdfUtil.GetDataFromPdfByArea(PdfPreview.PdfDoc, item.DataRegion);
+                item.Id = Guid.NewGuid().ToString();
+                fields.Add(item.Id, item);
+            }
         }
 
         #region Events
-        private void btnAddField_Click(object sender, EventArgs e)
+        private void btnAddEditField_Click(object sender, EventArgs e)
         {
-            frmAddField addField = new frmAddField(this, PdfUtil.GetPteview(previewFilePath, int.Parse(txtPage.Text)));
-            addField.ShowDialog();
+            frmAddEditField addEditField = new frmAddEditField(this, PdfUtil.GetPteview(previewFilePath, int.Parse(txtPage.Text)));
+            addEditField.ShowDialog();
+            addEditField.Dispose();
         }
 
         private void lbFields_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            frmAddField addField = new frmAddField(this, PdfUtil.GetPteview(previewFilePath, int.Parse(txtPage.Text)), (FieldModel)lbFields.SelectedItem);
-            addField.ShowDialog();
+            frmAddEditField addEditField = new frmAddEditField(this, PdfUtil.GetPteview(previewFilePath, int.Parse(txtPage.Text)), ((FieldModel)lbFields.SelectedItem).Id);
+            if (addEditField.ShowDialog() == DialogResult.OK)
+            {
+                PrintFields();
+            }
+            addEditField.Dispose();
         }
 
         private void btnImportList_Click(object sender, EventArgs e)
         {
+            wb.Url = null;
             openFileDialog1.Filter = "PDF files (*.pdf)|*.pdf|List of files (*.txt)|*.txt";
             lbFilesList.Items.Clear();
             string[] fileNames = new string[] { "" };
@@ -112,17 +129,18 @@ namespace PDF_Data
                 {
                     fileNames = File.ReadAllLines(fileNames[0]);
                 }
+
+                filePaths = fileNames.ToList();
+                lbFilesList.Items.AddRange(fileNames);
+                PdfPreview = new PdfUtil(filePaths[0]);
+                lbFilesList.SelectedIndex = 0;
+                RenderPreview();
             }
-            filePaths = fileNames.ToList();
-            lbFilesList.Items.AddRange(fileNames);
-            PdfPreview = new PdfUtil(filePaths[0]);
-            lbFilesList.SelectedIndex = 0;
-            RenderPreview();
         }
 
         private void lbFields_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ShowFieldsData();
+            PrintFieldsData();
         }
 
         private void lbFilesList_SelectedIndexChanged(object sender, EventArgs e)
@@ -147,14 +165,15 @@ namespace PDF_Data
 
         private void btnExtractData_Click(object sender, EventArgs e)
         {
-            frmExtractData extractData = new frmExtractData(filePaths, fields);
+            frmExtractData extractData = new frmExtractData(filePaths, fields.Values.ToList());
             extractData.ShowDialog();
+            extractData.Dispose();
         }
 
         private void btnSaveFields_Click(object sender, EventArgs e)
         {
 
-            string json = FieldModel.GetFieldsjason(fields);
+            string json = FieldModel.GetFieldsjason(fields.Values.ToList());
             openFileDialog1.Filter = "JavaScript Object Notation (*.json)|*.json";
             openFileDialog1.AddExtension = true;
             openFileDialog1.CheckFileExists = false;
@@ -176,8 +195,9 @@ namespace PDF_Data
             {
                 string fileName = openFileDialog1.FileName;
                 string json = File.ReadAllText(fileName);
-                fields = FieldModel.GetListFromJson(json);
-                RenderFields();
+                //fields = FieldModel.GetListFromJson(json);
+                InitializeData(FieldModel.GetListFromJson(json));
+                PrintFields();
             }
         }
 

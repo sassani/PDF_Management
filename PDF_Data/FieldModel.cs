@@ -8,13 +8,15 @@ namespace PDF_Data
 {
     public class FieldModel
     {
+        [JsonIgnore]
+        public string Id { get; set; }
         public enum DataTypes { ROWS, FIXED }
         public string Name { get; set; }
         public DataTypes Type { get; set; }
         [JsonIgnore]
         public Rectangle DataRegion { get; set; }
         [JsonIgnore]
-        public string[] FieldData { get; set; }
+        public string[] Data { get; set; }
         public int FirstPage { get; set; }
         public int LastPage { get; set; }
 
@@ -39,7 +41,7 @@ namespace PDF_Data
         }
 
         [JsonConstructor]
-        public FieldModel(string name,int x, int y, int width, int height, DataTypes type,  int firstPage = 1, int lastPage = -1)
+        public FieldModel(string name, int x, int y, int width, int height, DataTypes type, int firstPage = 1, int lastPage = -1)
         {
             Name = name;
             FirstPage = firstPage;
@@ -52,7 +54,7 @@ namespace PDF_Data
             DataRegion = new Rectangle(x, y, width, height);
         }
 
-        public FieldModel(string name, int x, int y, int width, int height, DataTypes type, string[] data, int firstPage = 1, int lastPage = -1)
+        public FieldModel(string name, int x, int y, int width, int height, DataTypes type, string[] data, string id, int firstPage = 1, int lastPage = -1)
         {
             Name = name;
             FirstPage = firstPage;
@@ -63,7 +65,8 @@ namespace PDF_Data
             Width = width;
             Height = height;
             DataRegion = new Rectangle(x, y, width, height);
-            FieldData = data;
+            Data = data;
+            Id = id;
         }
     }
 }

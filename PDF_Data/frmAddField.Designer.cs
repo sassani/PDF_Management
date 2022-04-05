@@ -1,7 +1,7 @@
 ﻿
 namespace PDF_Data
 {
-    partial class frmAddField
+    partial class frmAddEditField
     {
         /// <summary>
         /// Required designer variable.
@@ -146,6 +146,7 @@ namespace PDF_Data
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(632, 67);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
@@ -157,6 +158,7 @@ namespace PDF_Data
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSave.Enabled = false;
             this.btnSave.Location = new System.Drawing.Point(713, 67);
             this.btnSave.Name = "btnSave";
