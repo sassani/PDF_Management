@@ -46,17 +46,17 @@ namespace PDF_Data
 
             int w = Math.Abs(lines["left"].P1.X - lines["right"].P1.X);
             int h = Math.Abs(lines["top"].P1.Y - lines["bottom"].P1.Y);
-            Point base1 = new Point(lines["left"].P1.X, image.Size.Height - lines["bottom"].P1.Y);// for y coordinate we need to change the direction. Base point is left_bottom instead of left_top
-            //Point base2 = new Point(lines["left"].P1.X, lines["top"].P1.Y);
-            Rectangle rect = new Rectangle(base1, new Size(w, h));
+            Point basePoint = new Point(lines["left"].P1.X, image.Size.Height - lines["bottom"].P1.Y);// for y coordinate we need to change the direction. Base point is left_bottom instead of left_top
+            //Point basePoint = new Point(lines["left"].P1.X, lines["top"].P1.Y);
+            Rectangle rect = new Rectangle(basePoint, new Size(w, h));
             return rect;
         }
 
         private void Initialize()
         {
             FieldModel field = parent.GetField(currentKey);
-            lines["top"] = new BLine("top", new Point(0, field.Height - field.Y), new Point(image.Width, field.Height - field.Y), rbTop.ForeColor);
-            lines["bottom"] = new BLine("bottom", new Point(0, field.Y), new Point(image.Width, field.Y), rbBottom.ForeColor);
+            lines["top"] = new BLine("top", new Point(0, image.Height - field.Y - field.Height), new Point(image.Width, image.Height - field.Y - field.Height), rbTop.ForeColor);
+            lines["bottom"] = new BLine("bottom", new Point(0, image.Height - field.Y), new Point(image.Width, image.Height - field.Y), rbBottom.ForeColor);
             lines["left"] = new BLine("left", new Point(field.X, 0), new Point(field.X, image.Height), rbLeft.ForeColor);
             lines["right"] = new BLine("right", new Point(field.X + field.Width, 0), new Point(field.X + field.Width, image.Height), rbRight.ForeColor);
             txtFieldName.Text = field.Name;

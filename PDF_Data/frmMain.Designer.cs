@@ -73,7 +73,7 @@ namespace PDF_Data
             // btnImportList
             // 
             this.btnImportList.Location = new System.Drawing.Point(1, 1);
-            this.btnImportList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btnImportList.Margin = new System.Windows.Forms.Padding(1);
             this.btnImportList.Name = "btnImportList";
             this.btnImportList.Size = new System.Drawing.Size(75, 23);
             this.btnImportList.TabIndex = 0;
@@ -84,7 +84,7 @@ namespace PDF_Data
             // btnAddField
             // 
             this.btnAddField.Location = new System.Drawing.Point(2, 1);
-            this.btnAddField.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btnAddField.Margin = new System.Windows.Forms.Padding(1);
             this.btnAddField.Name = "btnAddField";
             this.btnAddField.Size = new System.Drawing.Size(75, 23);
             this.btnAddField.TabIndex = 0;
@@ -127,7 +127,7 @@ namespace PDF_Data
             // txtPage
             // 
             this.txtPage.Location = new System.Drawing.Point(79, 2);
-            this.txtPage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.txtPage.Margin = new System.Windows.Forms.Padding(1);
             this.txtPage.Name = "txtPage";
             this.txtPage.Size = new System.Drawing.Size(40, 20);
             this.txtPage.TabIndex = 4;
@@ -184,7 +184,7 @@ namespace PDF_Data
             // btnExtractData
             // 
             this.btnExtractData.Location = new System.Drawing.Point(2, 26);
-            this.btnExtractData.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btnExtractData.Margin = new System.Windows.Forms.Padding(1);
             this.btnExtractData.Name = "btnExtractData";
             this.btnExtractData.Size = new System.Drawing.Size(75, 23);
             this.btnExtractData.TabIndex = 0;
@@ -263,6 +263,7 @@ namespace PDF_Data
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmMain";
             this.Text = "PDF Management";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
