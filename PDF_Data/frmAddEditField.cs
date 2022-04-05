@@ -55,7 +55,7 @@ namespace PDF_Data
         private void Initialize()
         {
             FieldModel field = parent.GetField(currentKey);
-            lines["top"] = new BLine("top", new Point(0, field.Height + field.Y), new Point(image.Width, field.Height + field.Y), rbTop.ForeColor);
+            lines["top"] = new BLine("top", new Point(0, field.Height - field.Y), new Point(image.Width, field.Height - field.Y), rbTop.ForeColor);
             lines["bottom"] = new BLine("bottom", new Point(0, field.Y), new Point(image.Width, field.Y), rbBottom.ForeColor);
             lines["left"] = new BLine("left", new Point(field.X, 0), new Point(field.X, image.Height), rbLeft.ForeColor);
             lines["right"] = new BLine("right", new Point(field.X + field.Width, 0), new Point(field.X + field.Width, image.Height), rbRight.ForeColor);

@@ -161,11 +161,11 @@
     <Compile Include="frmExtractData.Designer.cs">
       <DependentUpon>frmExtractData.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAddField.cs">
+    <Compile Include="frmAddEditField.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddField.Designer.cs">
-      <DependentUpon>frmAddField.cs</DependentUpon>
+    <Compile Include="frmAddEditField.Designer.cs">
+      <DependentUpon>frmAddEditField.cs</DependentUpon>
     </Compile>
     <Compile Include="BLine.cs" />
     <Compile Include="FieldModel.cs" />
@@ -181,8 +181,8 @@
     <EmbeddedResource Include="frmExtractData.resx">
       <DependentUpon>frmExtractData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAddField.resx">
-      <DependentUpon>frmAddField.cs</DependentUpon>
+    <EmbeddedResource Include="frmAddEditField.resx">
+      <DependentUpon>frmAddEditField.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
