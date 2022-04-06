@@ -10,11 +10,11 @@ namespace PDF_Data
         private IDictionary<string, BLine> lines = new Dictionary<string, BLine>();
         private Point[] points = new Point[2];
         private Rectangle rectangle;
+        private bool waitingForSecond = false;
         private Image image;
         private frmMain parent;
         private string[] data;
         private string currentKey;
-        private int pCount = 0;
 
         public frmAddEditField(frmMain parent, Image image, string currentKey = null)
         {
@@ -31,55 +31,55 @@ namespace PDF_Data
             }
         }
 
-        private void DrawLines()
-        {
-            pbPreview.Refresh();
-            using (Graphics g = pbPreview.CreateGraphics())
-            {
-                foreach (BLine line in lines.Values)
-                {
-                    Pen pen = new Pen(line.PenColor);
-                    g.DrawLine(pen, line.P1, line.P2);
-                }
-            }
-        }
-
         private void DrawRectangle()
         {
             pbPreview.Refresh();
             using (Graphics g = pbPreview.CreateGraphics())
             {
-                //rectangle = new Rectangle(points[0], new Size(Math.Abs(points[0].X - points[1].X), Math.Abs(points[0].Y - points[1].Y)));
                 Pen pen = new Pen(Color.Aqua);
+                SolidBrush blueBrush = new SolidBrush(Color.FromArgb(50, 182, 239, 249));
+                g.FillRectangle(blueBrush, rectangle);
                 g.DrawRectangle(pen, rectangle);
             }
         }
 
-        private void ClearRectangle()
+        private void GenerateRectangle()
         {
             pbPreview.Refresh();
-        }
-
-        private Rectangle GetRecatngle()
-        {
-
-            int w = Math.Abs(lines["left"].P1.X - lines["right"].P1.X);
-            int h = Math.Abs(lines["top"].P1.Y - lines["bottom"].P1.Y);
-            Point basePoint = new Point(lines["left"].P1.X, image.Size.Height - lines["bottom"].P1.Y);// for y coordinate we need to change the direction. Base point is left_bottom instead of left_top
-            //Point basePoint = new Point(lines["left"].P1.X, lines["top"].P1.Y);
-            Rectangle rect = new Rectangle(basePoint, new Size(w, h));
-            return rect;
+            Size s = new Size(Math.Abs(points[0].X - points[1].X), Math.Abs(points[0].Y - points[1].Y));
+            Point b = new Point(0, 0);
+            if (points[0].X < points[1].X)
+            {//I and III
+                if (points[0].Y < points[1].Y)
+                {// III
+                    b = points[0];
+                }
+                else
+                {// I
+                    b = new Point(points[0].X, points[1].Y);
+                }
+            }
+            else
+            {// II and IV
+                if (points[0].Y < points[1].Y)
+                {// IV
+                    b = new Point(points[1].X, points[0].Y);
+                }
+                else
+                {// II
+                    b = points[1];
+                }
+            }
+            rectangle = new Rectangle(b, s);
+            DrawRectangle();
         }
 
         private void Initialize()
         {
             FieldModel field = parent.GetField(currentKey);
-            lines["top"] = new BLine("top", new Point(0, image.Height - field.Y - field.Height), new Point(image.Width, image.Height - field.Y - field.Height), rbTop.ForeColor);
-            lines["bottom"] = new BLine("bottom", new Point(0, image.Height - field.Y), new Point(image.Width, image.Height - field.Y), rbBottom.ForeColor);
-            lines["left"] = new BLine("left", new Point(field.X, 0), new Point(field.X, image.Height), rbLeft.ForeColor);
-            lines["right"] = new BLine("right", new Point(field.X + field.Width, 0), new Point(field.X + field.Width, image.Height), rbRight.ForeColor);
+            rectangle = field.DataRegion;
             txtFieldName.Text = field.Name;
-            //DrawLines();
+            DrawRectangle();
         }
 
         private bool CheckFieldName(string name)
@@ -88,88 +88,63 @@ namespace PDF_Data
             return false;
         }
 
-        private void ValidateForm()
+        private bool CheckFormValidation()
         {
             bool isValid = (
-                CheckFieldName(txtFieldName.Text) &&
-                (lines.Count == 4));
+                CheckFieldName(txtFieldName.Text)
+                //&& (lines.Count == 4)
+                );
             btnSave.Enabled = isValid;
-            if (isValid)
+            return isValid;
+        }
+
+        private void GetPreviewData()
+        {
+            if (CheckFormValidation())
             {
                 try
                 {
-                    data = PdfUtil.GetDataFromPdfByArea(parent.PdfPreview.PdfDoc, GetRecatngle(), int.Parse(txtPageFrom.Text), int.Parse(txtPagesTo.Text));
+                    data = PdfUtil.GetDataFromPdfByArea(parent.PdfPreview.PdfDoc, rectangle, int.Parse(txtPageFrom.Text), int.Parse(txtPagesTo.Text));
                     txtPreview.Text = String.Join("\n", data);
                 }
                 catch (Exception err)
                 {
-
                     Console.WriteLine(err.Message);
                 }
             }
         }
 
         #region Events
+        
         private void pbPreview_MouseClick(object sender, MouseEventArgs e)
         {
-            if (rbTop.Checked)
-            {
-                lines["top"] = new BLine("top", new Point(0, e.Y), new Point(image.Width, e.Y), rbTop.ForeColor);
-            }
-            if (rbBottom.Checked)
-            {
-                lines["bottom"] = new BLine("bottom", new Point(0, e.Y), new Point(image.Width, e.Y), rbBottom.ForeColor);
-            }
-            if (rbLeft.Checked)
-            {
-                lines["left"] = new BLine("left", new Point(e.X, 0), new Point(e.X, image.Height), rbLeft.ForeColor);
-            }
-            if (rbRight.Checked)
-            {
-                lines["right"] = new BLine("right", new Point(e.X, 0), new Point(e.X, image.Height), rbRight.ForeColor);
-            }
-
-            if (rbTL.Checked)
+            if (!waitingForSecond)
             {
                 points[0] = e.Location;
+                waitingForSecond = true;
             }
-            if (rbBR.Checked)
+            else
             {
                 points[1] = e.Location;
+                waitingForSecond = false;
+                GetPreviewData();
             }
 
-            if (rbRect.Checked)
+        }
+        private void pbPreview_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (waitingForSecond)
             {
-                switch (pCount)
-                {
-                    case 0:
-                        points[0] = e.Location;
-                        pCount++;
-                        break;
-                    case 1:
-                        points[1] = e.Location;
-                        pCount++;
-                        rectangle = new Rectangle(points[0], new Size(Math.Abs(points[0].X - points[1].X), Math.Abs(points[0].Y - points[1].Y)));
-                        DrawRectangle();
-                        break;
-                    case 2:
-                        pCount = 0;
-                        ClearRectangle();
-                        break;
-                    default:
-                        break;
-                }
+                points[1] = e.Location;
+                GenerateRectangle();
             }
-            //DrawLines();
-            //ValidateForm();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Rectangle rect = GetRecatngle();
             FieldModel temp = new FieldModel(
                     txtFieldName.Text,
-                    rect.X, rect.Y, rect.Width, rect.Height,
+                    rectangle,
                     (FieldModel.DataTypes)Enum.Parse(typeof(FieldModel.DataTypes), cbType.SelectedItem.ToString()),
                     data,
                     currentKey,
@@ -183,18 +158,20 @@ namespace PDF_Data
             {
                 parent.EditField(currentKey, temp);
             }
+
+            DialogResult = DialogResult.OK;
             Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
             Close();
         }
 
         private void txtFieldName_TextChanged(object sender, EventArgs e)
         {
-            ValidateForm();
+            GetPreviewData();
         }
 
         private void panel1_Scroll(object sender, ScrollEventArgs e)
@@ -209,5 +186,10 @@ namespace PDF_Data
             DrawRectangle();
         }
         #endregion
+
+        private void frmAddEditField_Load(object sender, EventArgs e)
+        {
+            if (currentKey != null) DrawRectangle();
+        }
     }
 }

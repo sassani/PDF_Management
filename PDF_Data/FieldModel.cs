@@ -54,17 +54,17 @@ namespace PDF_Data
             DataRegion = new Rectangle(x, y, width, height);
         }
 
-        public FieldModel(string name, int x, int y, int width, int height, DataTypes type, string[] data, string id, int firstPage = 1, int lastPage = -1)
+        public FieldModel(string name, Rectangle rect , DataTypes type, string[] data, string id, int firstPage = 1, int lastPage = -1)
         {
             Name = name;
             FirstPage = firstPage;
             LastPage = lastPage;
             Type = type;
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
-            DataRegion = new Rectangle(x, y, width, height);
+            X = rect.X;
+            Y = rect.Y;
+            Width = rect.Width;
+            Height = rect.Height;
+            DataRegion = rect;
             Data = data;
             Id = id;
         }

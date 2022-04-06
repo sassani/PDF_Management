@@ -27,7 +27,7 @@ namespace PDF_Data
             PageNumber = PdfDoc.GetNumberOfPages();
         }
 
-        public static Image GetPteview(string filePath, int page=1)
+        public static Image GetPteview(string filePath, int page = 1)
         {
             Image preview = new Bitmap(10, 10);
             using (GhostscriptRasterizer rasterizer = new GhostscriptRasterizer())
@@ -50,7 +50,7 @@ namespace PDF_Data
                 foreach (string filePath in filePaths)
                 {
                     PdfDocument pdfDoc = await GetPdfAsync(filePath);
-                    var data = await GetFieldsDataFromFile (filePath, fields);
+                    var data = await GetFieldsDataFromFile(filePath, fields);
                     int maxDataCount = GetMAxDataCount(data);
                     for (int i = 0; i < maxDataCount; i++)
                     {
@@ -135,7 +135,7 @@ namespace PDF_Data
         {
             try
             {
-                return await Task.Run(()=> new PdfDocument(new PdfReader(filePath)));
+                return await Task.Run(() => new PdfDocument(new PdfReader(filePath)));
             }
             catch (Exception)
             {
@@ -149,7 +149,7 @@ namespace PDF_Data
         {
             try
             {
-                return  new PdfDocument(new PdfReader(filePath));
+                return new PdfDocument(new PdfReader(filePath));
             }
             catch (Exception)
             {
@@ -162,10 +162,10 @@ namespace PDF_Data
         public static string[] GetDataFromPdfByArea(PdfDocument pdfDoc, Rectangle r, int pageFrom = 1, int pageTo = -1)
         {
             iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(
-                PointToPixel(r.X),
-                PointToPixel(r.Y),
-                PointToPixel(r.Width),
-                PointToPixel(r.Height)
+                (float)PointToPixel(r.X),
+                (float)(pdfDoc.GetPage(pageFrom).GetPageSize().GetHeight() - PointToPixel(r.Y) - PointToPixel(r.Height)), // change base point coordination from top to bottom
+                (float)PointToPixel(r.Width),
+                (float)PointToPixel(r.Height)
                 );
             TextRegionEventFilter regionFilter = new TextRegionEventFilter(rect);
             StringBuilder sb = new StringBuilder();
@@ -186,9 +186,9 @@ namespace PDF_Data
             return sb.ToString().Remove(sb.Length - 2).Split('\n');
         }
 
-        private static float PointToPixel(int pt)
+        private static double PointToPixel(int pt)
         {
-            return pt * 72 / RESOLUTION;
+            return pt * 72.0 / RESOLUTION;
         }
 
 

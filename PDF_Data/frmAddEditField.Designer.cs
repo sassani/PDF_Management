@@ -29,11 +29,6 @@ namespace PDF_Data
         /// </summary>
         private void InitializeComponent()
         {
-            this.rbLeft = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbTop = new System.Windows.Forms.RadioButton();
-            this.rbRight = new System.Windows.Forms.RadioButton();
-            this.rbBottom = new System.Windows.Forms.RadioButton();
             this.txtFieldName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pbPreview = new System.Windows.Forms.PictureBox();
@@ -47,77 +42,9 @@ namespace PDF_Data
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cbType = new System.Windows.Forms.ComboBox();
-            this.rbTL = new System.Windows.Forms.RadioButton();
-            this.rbBR = new System.Windows.Forms.RadioButton();
-            this.rbRect = new System.Windows.Forms.RadioButton();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // rbLeft
-            // 
-            this.rbLeft.AutoSize = true;
-            this.rbLeft.ForeColor = System.Drawing.Color.Blue;
-            this.rbLeft.Location = new System.Drawing.Point(59, 24);
-            this.rbLeft.Name = "rbLeft";
-            this.rbLeft.Size = new System.Drawing.Size(43, 17);
-            this.rbLeft.TabIndex = 0;
-            this.rbLeft.TabStop = true;
-            this.rbLeft.Text = "Left";
-            this.rbLeft.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rbBR);
-            this.groupBox1.Controls.Add(this.rbRect);
-            this.groupBox1.Controls.Add(this.rbTL);
-            this.groupBox1.Controls.Add(this.rbTop);
-            this.groupBox1.Controls.Add(this.rbRight);
-            this.groupBox1.Controls.Add(this.rbBottom);
-            this.groupBox1.Controls.Add(this.rbLeft);
-            this.groupBox1.Location = new System.Drawing.Point(12, 36);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(575, 54);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Boundaries";
-            // 
-            // rbTop
-            // 
-            this.rbTop.AutoSize = true;
-            this.rbTop.ForeColor = System.Drawing.Color.Red;
-            this.rbTop.Location = new System.Drawing.Point(9, 24);
-            this.rbTop.Name = "rbTop";
-            this.rbTop.Size = new System.Drawing.Size(44, 17);
-            this.rbTop.TabIndex = 0;
-            this.rbTop.TabStop = true;
-            this.rbTop.Text = "Top";
-            this.rbTop.UseVisualStyleBackColor = true;
-            // 
-            // rbRight
-            // 
-            this.rbRight.AutoSize = true;
-            this.rbRight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.rbRight.Location = new System.Drawing.Point(108, 24);
-            this.rbRight.Name = "rbRight";
-            this.rbRight.Size = new System.Drawing.Size(50, 17);
-            this.rbRight.TabIndex = 0;
-            this.rbRight.TabStop = true;
-            this.rbRight.Text = "Right";
-            this.rbRight.UseVisualStyleBackColor = true;
-            // 
-            // rbBottom
-            // 
-            this.rbBottom.AutoSize = true;
-            this.rbBottom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.rbBottom.Location = new System.Drawing.Point(164, 24);
-            this.rbBottom.Name = "rbBottom";
-            this.rbBottom.Size = new System.Drawing.Size(58, 17);
-            this.rbBottom.TabIndex = 0;
-            this.rbBottom.TabStop = true;
-            this.rbBottom.Text = "Bottom";
-            this.rbBottom.UseVisualStyleBackColor = true;
             // 
             // txtFieldName
             // 
@@ -148,12 +75,13 @@ namespace PDF_Data
             this.pbPreview.TabIndex = 4;
             this.pbPreview.TabStop = false;
             this.pbPreview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbPreview_MouseClick);
+            this.pbPreview.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPreview_MouseMove);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(632, 67);
+            this.btnCancel.Location = new System.Drawing.Point(632, 10);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
@@ -166,7 +94,7 @@ namespace PDF_Data
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(713, 67);
+            this.btnSave.Location = new System.Drawing.Point(713, 10);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 5;
@@ -182,10 +110,10 @@ namespace PDF_Data
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.txtPreview);
             this.panel1.Controls.Add(this.pbPreview);
-            this.panel1.Location = new System.Drawing.Point(12, 96);
+            this.panel1.Location = new System.Drawing.Point(12, 36);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 345);
+            this.panel1.Size = new System.Drawing.Size(776, 405);
             this.panel1.TabIndex = 6;
             this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
             this.panel1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseWheel);
@@ -196,7 +124,7 @@ namespace PDF_Data
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPreview.Location = new System.Drawing.Point(620, 0);
             this.txtPreview.Name = "txtPreview";
-            this.txtPreview.Size = new System.Drawing.Size(156, 345);
+            this.txtPreview.Size = new System.Drawing.Size(156, 405);
             this.txtPreview.TabIndex = 5;
             this.txtPreview.Text = "";
             // 
@@ -253,39 +181,6 @@ namespace PDF_Data
             this.cbType.Size = new System.Drawing.Size(81, 21);
             this.cbType.TabIndex = 7;
             // 
-            // rbTL
-            // 
-            this.rbTL.AutoSize = true;
-            this.rbTL.Location = new System.Drawing.Point(409, 24);
-            this.rbTL.Name = "rbTL";
-            this.rbTL.Size = new System.Drawing.Size(65, 17);
-            this.rbTL.TabIndex = 1;
-            this.rbTL.TabStop = true;
-            this.rbTL.Text = "Top-Left";
-            this.rbTL.UseVisualStyleBackColor = true;
-            // 
-            // rbBR
-            // 
-            this.rbBR.AutoSize = true;
-            this.rbBR.Location = new System.Drawing.Point(480, 24);
-            this.rbBR.Name = "rbBR";
-            this.rbBR.Size = new System.Drawing.Size(86, 17);
-            this.rbBR.TabIndex = 2;
-            this.rbBR.TabStop = true;
-            this.rbBR.Text = "Bottom-Right";
-            this.rbBR.UseVisualStyleBackColor = true;
-            // 
-            // rbRect
-            // 
-            this.rbRect.AutoSize = true;
-            this.rbRect.Location = new System.Drawing.Point(329, 24);
-            this.rbRect.Name = "rbRect";
-            this.rbRect.Size = new System.Drawing.Size(74, 17);
-            this.rbRect.TabIndex = 1;
-            this.rbRect.TabStop = true;
-            this.rbRect.Text = "Rectangle";
-            this.rbRect.UseVisualStyleBackColor = true;
-            // 
             // frmAddEditField
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,12 +197,10 @@ namespace PDF_Data
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtFieldName);
-            this.Controls.Add(this.groupBox1);
             this.Name = "frmAddEditField";
             this.Text = "AddField";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Load += new System.EventHandler(this.frmAddEditField_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -317,12 +210,6 @@ namespace PDF_Data
         }
 
         #endregion
-
-        private System.Windows.Forms.RadioButton rbLeft;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbTop;
-        private System.Windows.Forms.RadioButton rbRight;
-        private System.Windows.Forms.RadioButton rbBottom;
         private System.Windows.Forms.TextBox txtFieldName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pbPreview;
@@ -336,8 +223,5 @@ namespace PDF_Data
         private System.Windows.Forms.RichTextBox txtPreview;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbType;
-        private System.Windows.Forms.RadioButton rbBR;
-        private System.Windows.Forms.RadioButton rbTL;
-        private System.Windows.Forms.RadioButton rbRect;
     }
 }
