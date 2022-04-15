@@ -47,22 +47,21 @@ namespace PDF_Data
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // wb
             // 
-            this.wb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.wb.Location = new System.Drawing.Point(0, 53);
-            this.wb.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wb.Location = new System.Drawing.Point(0, 0);
             this.wb.Name = "wb";
-            this.wb.Size = new System.Drawing.Size(698, 386);
+            this.wb.Size = new System.Drawing.Size(697, 385);
             this.wb.TabIndex = 1;
             // 
             // openFileDialog1
@@ -73,7 +72,7 @@ namespace PDF_Data
             // btnImportList
             // 
             this.btnImportList.Location = new System.Drawing.Point(1, 1);
-            this.btnImportList.Margin = new System.Windows.Forms.Padding(1);
+            this.btnImportList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnImportList.Name = "btnImportList";
             this.btnImportList.Size = new System.Drawing.Size(75, 23);
             this.btnImportList.TabIndex = 0;
@@ -84,7 +83,7 @@ namespace PDF_Data
             // btnAddField
             // 
             this.btnAddField.Location = new System.Drawing.Point(2, 1);
-            this.btnAddField.Margin = new System.Windows.Forms.Padding(1);
+            this.btnAddField.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnAddField.Name = "btnAddField";
             this.btnAddField.Size = new System.Drawing.Size(75, 23);
             this.btnAddField.TabIndex = 0;
@@ -118,7 +117,7 @@ namespace PDF_Data
             // lblPageCount
             // 
             this.lblPageCount.AutoSize = true;
-            this.lblPageCount.Location = new System.Drawing.Point(3, 36);
+            this.lblPageCount.Location = new System.Drawing.Point(278, 26);
             this.lblPageCount.Name = "lblPageCount";
             this.lblPageCount.Size = new System.Drawing.Size(35, 13);
             this.lblPageCount.TabIndex = 2;
@@ -127,7 +126,7 @@ namespace PDF_Data
             // txtPage
             // 
             this.txtPage.Location = new System.Drawing.Point(79, 2);
-            this.txtPage.Margin = new System.Windows.Forms.Padding(1);
+            this.txtPage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.txtPage.Name = "txtPage";
             this.txtPage.Size = new System.Drawing.Size(40, 20);
             this.txtPage.TabIndex = 4;
@@ -184,7 +183,7 @@ namespace PDF_Data
             // btnExtractData
             // 
             this.btnExtractData.Location = new System.Drawing.Point(2, 26);
-            this.btnExtractData.Margin = new System.Windows.Forms.Padding(1);
+            this.btnExtractData.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnExtractData.Name = "btnExtractData";
             this.btnExtractData.Size = new System.Drawing.Size(75, 23);
             this.btnExtractData.TabIndex = 0;
@@ -208,6 +207,7 @@ namespace PDF_Data
             // panel2
             // 
             this.panel2.Controls.Add(this.btnImportList);
+            this.panel2.Controls.Add(this.lblPageCount);
             this.panel2.Controls.Add(this.lblError);
             this.panel2.Controls.Add(this.lbFilesList);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -218,8 +218,7 @@ namespace PDF_Data
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.wb);
-            this.panel3.Controls.Add(this.lblPageCount);
+            this.panel3.Controls.Add(this.panel5);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(356, 3);
             this.panel3.Name = "panel3";
@@ -255,6 +254,17 @@ namespace PDF_Data
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1413, 445);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Controls.Add(this.wb);
+            this.panel5.Location = new System.Drawing.Point(0, 54);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(697, 385);
+            this.panel5.TabIndex = 0;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,9 +279,9 @@ namespace PDF_Data
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,6 +306,7 @@ namespace PDF_Data
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel5;
     }
 }
 
