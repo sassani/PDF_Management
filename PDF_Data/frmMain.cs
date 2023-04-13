@@ -51,6 +51,8 @@ namespace PDF_Data
             try
             {
                 wb.Url = new Uri(previewFilePath);
+                //wb.Navigate(new Uri(previewFilePath));
+
                 lblPageCount.Text = PAGE_C + PdfPreview.PdfDoc.GetNumberOfPages();
                 btnAddField.Enabled = true;
             }
@@ -145,7 +147,7 @@ namespace PDF_Data
 
         private void lbFilesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("test");
+            //Console.WriteLine("test");
 
             try
             {

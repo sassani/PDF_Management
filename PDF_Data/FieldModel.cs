@@ -10,7 +10,7 @@ namespace PDF_Data
     {
         [JsonIgnore]
         public string Id { get; set; }
-        public enum DataTypes { ROWS, FIXED }
+        public enum DataTypes { LIST, FIXED }
         public string Name { get; set; }
         public DataTypes Type { get; set; }
         [JsonIgnore]
